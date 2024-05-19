@@ -12,6 +12,8 @@ include_once 'masyarakat/proposal_masyarakat_controller.php';
 require_once 'pemerintah/dash_pemerintah_controller.php';
 include_once 'masyarakat/aduan_masyarakat_controller.php';
 include_once 'pemerintah/aduan_pemerintah_controller.php';
+include_once 'pemerintah/proposal_pemerintah_controller.php';
+require_once 'pemerintah/proposal_pemerintah_controller.php';
 
 include_once 'config/alert.php';
 

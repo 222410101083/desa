@@ -122,5 +122,40 @@ class Proposal
         $stmt->bind_param('i', $id);
         $stmt->execute();
     }
+    public static function newStatusProposal($id_proposal, $status_baru)
+    {
+        global $conn;
+        $sql = "UPDATE proposal SET status=? WHERE id_proposal=?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            throw new Exception("MySQL prepare error: " . $conn->error);
+        }
+        $stmt->bind_param('si', $status_baru, $id_proposal);
+        $stmt->execute();
+        if ($stmt->error) {
+            throw new Exception("Execute error: " . $stmt->error);
+        }
+        $stmt->close();
+    }
+
+    public static function updateStatusProposal($id_proposal, $status_baru)
+    {
+        $status_baru = trim($status_baru); // Memangkas spasi ekstra
+        global $conn; // Menggunakan koneksi yang sudah ada
+
+        // Periksa panjang status baru
+        if (strlen($status_baru) > 10) { // Anggap 10 sebagai batas maksimal karakter
+            throw new Exception("Status terlalu panjang. Maksimal 10 karakter.");
+        }
+
+        $stmt = $conn->prepare("UPDATE proposal SET status = ? WHERE id_proposal = ?");
+        $stmt->bind_param("si", $status_baru, $id_proposal);
+
+        if (!$stmt->execute()) {
+            throw new Exception("Error: " . $stmt->error);
+        }
+        $stmt->close();
+        $conn->close();
+    }
 }
 ?>

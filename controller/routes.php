@@ -29,10 +29,13 @@ Router::url('tambahakun/tambahakunpemerintah', 'post', 'AdminController::saveTam
 #Pemerintah
 Router::url('pemerintah/dashboard', 'get', 'DashboardPemerintahController::index');
 Router::url('pemerintah/proposal', 'get', 'DashboardPemerintahController::ListProposal');
-Router::url('pemerintah/proposal/edit', 'get', 'DashboardPemerintahController::EditProposal');
+Router::url('pemerintah/proposal/ubahstatus', 'get', 'ProposalPemerintahController::showUbahStatusProposal');
 Router::url('pemerintah/aduan', 'get', 'AduanPemerintahController::index');
 Router::url('pemerintah/aduan/delete', 'get', 'AduanPemerintahController::delete');
 Router::url('pemerintah/logout', 'get', 'AuthController::logout');
+
+#Pemerintah POST
+Router::url('pemerintah/proposal/ubahstatus', 'post', 'ProposalPemerintahController::ubahStatusProposal');
 
 #Masyarakat
 Router::url('masyarakat/dashboard', 'get', 'DashboardMasyarakatController::index');

@@ -1,6 +1,6 @@
 <?php
 
-include_once 'model/contact_model.php';
+include_once 'model/proposal_model.php';
 
 class DashboardPemerintahController {
     static function index() {

@@ -19,32 +19,23 @@ include 'view/master.php'; ?>
             <tbody class="text-gray-700">
                 <?php
                 $no = 1;
-                if (is_array($proposals) || is_object($proposals)) {
                     foreach ($proposals as $proposal): ?>
                         <tr class="border-b border-gray-200 hover:bg-gray-100">
                             <td class="py-3 px-4"><?= $no++; ?></td>
-                            <td class="py-3 px-4"><?= htmlspecialchars($proposal['judul']) ?></td>
-                            <td class="py-3 px-4"><?= htmlspecialchars($proposal['deskripsi']) ?></td>
-                            <td class="py-3 px-4"><?= htmlspecialchars($proposal['tanggal_pengajuan']) ?></td>
-                            <td class="py-3 px-4"><?= htmlspecialchars($proposal['status']) ?></td>
+                            <td class="py-3 px-4"><?= ($proposal['judul']) ?></td>
+                            <td class="py-3 px-4"><?= ($proposal['deskripsi']) ?></td>
+                            <td class="py-3 px-4"><?= ($proposal['tanggal_pengajuan']) ?></td>
+                            <td class="py-3 px-4"><?= ($proposal['status']) ?></td>
                             <td class="py-3 px-4 flex justify-center items-center">
                                 <a href="/pweb/<?= $proposal['file_path'] ?>" target="_blank"
-                                    class="text-blue-500 hover:text-blue-700 ml-4"><button
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat</button></a>
-                                <div class="">
-                                    <a href="<?= htmlspecialchars(urlpath("masyarakat/proposal/edit?id=" . $proposal['id_proposal'])); ?>"
-                                        class="text-green-500 hover:text-green-700 ml-4"><button
-                                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Edit</button></a>
-                                </div>
-                                <div class="">
-                                    <a href="<?= htmlspecialchars(urlpath("masyarakat/proposal/delete?id=" . $proposal['id_proposal'])); ?>"
-                                        class="text-red-500 hover:text-red-700 ml-4"><button
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Hapus</button></a>
-                                </div>
+                                    class="text-blue-500 hover:text-blue-700 ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat</a>
+                                <a href="<?= (urlpath("masyarakat/proposal/edit?id=" . $proposal['id_proposal'])); ?>"
+                                    class=" bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-green-500 hover:text-green-700 ml-4">Edit</a>
+                                <a href="<?= (urlpath("masyarakat/proposal/delete?id=" . $proposal['id_proposal'])); ?>"
+                                    class=" bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-red-500 hover:text-red-700 ml-4">Hapus</a>
                             </td>
                         </tr>
                     <?php endforeach;
-                }
                 ?>
             </tbody>
         </table>
