@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Register for Contact App</h5>
+                    <h5 class="card-title text-center">Register for Desa Jatimulyo</h5>
                     <form action="<?= urlpath('register'); ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="name">Name</label>
@@ -17,11 +17,9 @@
                             <label for="password">Password</label>
                             <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group hidden">
                             <label for="role">Role</label>
                             <select name="role" class="form-control" id="role">
-                                <option value="admin">Admin</option>
-                                <option value="pemerintah" selected>Pemerintah</option>
                                 <option value="masyarakat">Masyarakat</option>
                             </select>
                         </div>

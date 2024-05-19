@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title text-center">Login to Contact App</h5>
+                    <h5 class="card-title text-center">Login to Desa Jatimulyo</h5>
                     <form action="<?= urlpath('login'); ?>" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="email">Email address</label>
