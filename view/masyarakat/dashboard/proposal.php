@@ -1,5 +1,9 @@
 <?php
-include 'view/master.php'; ?>
+include 'view/master.php'; 
+// session_start();
+// ob_start();
+$style = ob_get_clean();
+?>
 <div class="container mx-auto px-4">
     <h1 class="text-2xl font-bold text-center my-6">Daftar Proposal</h1>
     <a href="proposal/add" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Tambah
@@ -19,33 +23,24 @@ include 'view/master.php'; ?>
             <tbody class="text-gray-700">
                 <?php
                 $no = 1;
-                    foreach ($proposals as $proposal): ?>
-                        <tr class="border-b border-gray-200 hover:bg-gray-100">
-                            <td class="py-3 px-4"><?= $no++; ?></td>
-                            <td class="py-3 px-4"><?= ($proposal['judul']) ?></td>
-                            <td class="py-3 px-4"><?= ($proposal['deskripsi']) ?></td>
-                            <td class="py-3 px-4"><?= ($proposal['tanggal_pengajuan']) ?></td>
-                            <td class="py-3 px-4"><?= ($proposal['status']) ?></td>
-                            <td class="py-3 px-4 flex justify-center items-center">
-                                <a href="/pweb/<?= $proposal['file_path'] ?>" target="_blank"
-                                    class="text-blue-500 hover:text-blue-700 ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat</a>
-                                <a href="<?= (urlpath("masyarakat/proposal/edit?id=" . $proposal['id_proposal'])); ?>"
-                                    class=" bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded text-green-500 hover:text-green-700 ml-4">Edit</a>
-                                <a href="<?= (urlpath("masyarakat/proposal/delete?id=" . $proposal['id_proposal'])); ?>"
-                                    class=" bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-red-500 hover:text-red-700 ml-4">Hapus</a>
-                            </td>
-                        </tr>
-                    <?php endforeach;
-                ?>
+                foreach ($proposals as $proposal): ?>
+                    <tr class="border-b border-gray-200 hover:bg-gray-100">
+                        <td class="py-3 px-4"><?= $no++; ?></td>
+                        <td class="py-3 px-4"><?= ($proposal['judul']) ?></td>
+                        <td class="py-3 px-4"><?= ($proposal['deskripsi']) ?></td>
+                        <td class="py-3 px-4"><?= ($proposal['tanggal_pengajuan']) ?></td>
+                        <td class="py-3 px-4"><?= ($proposal['status']) ?></td>
+                        <td class="py-3 px-4 flex justify-center items-center">
+                            <a href="/pweb/<?= $proposal['file_path'] ?>" target="_blank"
+                                class="text-blue-500 ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat</a>
+                            <a href="/pweb/masyarakat/proposal/edit?id=<?= $proposal['id_proposal'] ?>"
+                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4">Edit</a>
+                            <a href="<?= (urlpath("masyarakat/proposal/delete?id=" . $proposal['id_proposal'])); ?>"
+                                class=" bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded text-red-500 hover:text-white-700 ml-4">Hapus</a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
 </div>
-
-
-<?php
-// session_start();
-ob_start();
-include 'style.css';
-$style = ob_get_clean();
-?>
