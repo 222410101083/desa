@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 19, 2024 at 09:37 AM
+-- Generation Time: May 19, 2024 at 10:42 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -416,8 +416,9 @@ CREATE TABLE `proposal` (
   `judul` varchar(255) NOT NULL,
   `deskripsi` text,
   `tanggal_pengajuan` datetime NOT NULL,
-  `status` enum('Diajukan','Diproses','Ditolak','Disetujui') NOT NULL,
+  `status` enum('Diajukan','Ditinjau','Ditolak','Disetujui') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `id_user` int DEFAULT NULL,
+  `nama_pengaju` varchar(255) DEFAULT NULL,
   `file_path` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -425,12 +426,12 @@ CREATE TABLE `proposal` (
 -- Dumping data for table `proposal`
 --
 
-INSERT INTO `proposal` (`id_proposal`, `judul`, `deskripsi`, `tanggal_pengajuan`, `status`, `id_user`, `file_path`) VALUES
-(13, 'Lomba Sepakbola', 'dsada', '2024-05-19 00:12:16', 'Diajukan', 158, './src/file/70a88f926def23489d45a825b4ac65f1.pdf'),
-(14, 'Ini Cara Desa Jatimulyo di Jember Maksimalkan RTH', 'asdsadasdasdsad', '2024-05-19 00:16:19', 'Diajukan', 158, './src/file/fe6e949a6cf33c068c58460a31992d6a.pdf'),
-(15, 'sdaasd', 'fafasfasf', '2024-05-19 00:16:41', 'Diajukan', 158, './src/file/8e3b122798585cb44e01cd93c3a3aa0f.pdf'),
-(16, 'Ini Cara Desa Jatimulyo di Jember Maksimalkan RTH', 'sadas', '2024-05-19 00:28:26', 'Diajukan', 163, './src/file/3b9fbef0b206d25dd09b331ebce46cc0.pdf'),
-(17, 'DIvo Tahta', 'dasdasdas', '2024-05-19 08:36:01', 'Diajukan', 158, './src/file/6bd54a7ed6ae22e37fc59539a38e9821.pdf');
+INSERT INTO `proposal` (`id_proposal`, `judul`, `deskripsi`, `tanggal_pengajuan`, `status`, `id_user`, `nama_pengaju`, `file_path`) VALUES
+(15, 'sdaasd', 'fafasfasf', '2024-05-19 00:16:41', 'Disetujui', 158, 'Divo Tahta Imannulloh', './src/file/8e3b122798585cb44e01cd93c3a3aa0f.pdf'),
+(16, 'Ini Cara Desa Jatimulyo di Jember Maksimalkan RTH', 'sadas', '2024-05-19 00:28:26', 'Ditolak', 163, 'Divo Tahta Imannulloh', './src/file/3b9fbef0b206d25dd09b331ebce46cc0.pdf'),
+(20, 'Lomba Sepakbola', 'sadasdddddd', '2024-05-19 16:35:27', 'Ditinjau', 158, 'Divo Tahta Imannulloh', './src/file/fdc6644b0bc86ce93a7ad9ee39a8fac6.pdf'),
+(25, 'Ini Cara Desa Jatimulyo di Jember Maksimalkan RTH', 'dasdsadsadasdsa', '2024-05-19 18:31:11', 'Diajukan', 158, 'Divo Tahta Imannulloh', './src/file/d0ae0e311fe70d98022dbcea5f578371.pdf'),
+(26, 'sadasdasdasdasd', 'dsadasdasdasdadads', '2024-05-19 18:31:20', 'Diajukan', 158, 'Divo Tahta Imannulloh', './src/file/d5b9d3a7788b3806cdf9df35429017cc.pdf');
 
 -- --------------------------------------------------------
 
@@ -459,7 +460,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `inserted_at`, `role`) V
 (161, 'Divo Tahta Imannulloh', 'masyarakat@gmail.com', '$2y$10$KTCzSnfMpe87eDOkciSPd.twwPrJeTquAt.tLqYvHV4PADLT56evq', '2024-05-18 06:57:12', 'masyarakat'),
 (162, 'Divo Tahta Imannulloh', 'alansuroso2003@gmail.com', '$2y$10$e9vFw01EUC1.FYtaJaAzdeYOlP2GxN0yDVLHw10NAV850blkonqZG', '2024-05-18 22:30:11', 'pemerintah'),
 (163, 'Divo Tahta Imannulloh', 'divo3@gmail.com', '$2y$10$k/h.XhjQThEQZqWsEYXQvurl79sgYjoXoWMyPJgjzO.DzlCA1Z6Xm', '2024-05-19 00:26:22', 'masyarakat'),
-(164, 'Divo Tahta Imannulloh', 'divomasyarakat@gmail.com', '$2y$10$3IFemaWd.m8AeT3BriesD.gWjfVz2cVlo8EYagJQv4IZ3JR4Zb6Eu', '2024-05-19 08:48:04', 'masyarakat');
+(164, 'Divo Tahta Imannulloh', 'divomasyarakat@gmail.com', '$2y$10$3IFemaWd.m8AeT3BriesD.gWjfVz2cVlo8EYagJQv4IZ3JR4Zb6Eu', '2024-05-19 08:48:04', 'masyarakat'),
+(166, 'Pemerintah', 'pemerintah@gmail.com', '$2y$10$4TiaBSPvGWqNWxCVoEozPOmYClox/2WkbkQtywwM/59zD84z1tH/u', '2024-05-19 15:28:21', 'pemerintah'),
+(167, 'Divo Tahta Imannulloh', 'admin@gmail.com', '$2y$10$fSKplKGgQ16SmNr2r.yzveVCQmm2JhIXk.YYfL1THdAx1j6XgixvO', '2024-05-19 15:29:33', 'pemerintah');
 
 --
 -- Indexes for dumped tables
@@ -520,7 +523,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `aduan`
 --
 ALTER TABLE `aduan`
-  MODIFY `id_aduan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_aduan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `cities`
@@ -538,13 +541,13 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `proposal`
 --
 ALTER TABLE `proposal`
-  MODIFY `id_proposal` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_proposal` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=168;
 
 --
 -- Constraints for dumped tables
