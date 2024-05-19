@@ -2,6 +2,7 @@
     <div class="flex justify-between items-center mb-8">
         <h1 class="text-2xl font-bold">Daftar Akun Pemerintah</h1>
     </div>
+    <a href="tambahakun" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Tambah Akun Pemerintah</a>
     <div class="bg-white shadow-md rounded my-6">
         <table class="min-w-full table-auto">
             <thead class="bg-gray-200">

@@ -2,7 +2,8 @@
 include 'view/master.php'; ?>
 <div class="container mx-auto px-4">
     <h1 class="text-2xl font-bold text-center my-6">Daftar Proposal</h1>
-    <div class="overflow-x-auto">
+    <a href="proposal/add" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Tambah Proposal</a>
+    <div class="overflow-x-auto mt-4">
         <table class="min-w-full bg-white shadow-md rounded-lg text-sm">
             <thead class="bg-gray-800 text-white">
                 <tr>

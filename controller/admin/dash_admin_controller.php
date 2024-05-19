@@ -46,9 +46,9 @@ class AdminController
         ]);
 
         if ($user) {
-            header('Location: ' . BASEURL . 'admin/dashboard');
+            header('Location: ' . BASEURL . 'admin/pemerintah?tambahakun=true');
         } else {
-            header('Location: ' . BASEURL . 'admin/dashboard');
+            header('Location: ' . BASEURL . 'admin/pemerintah?tambahakun=false');
         }
     }
     public static function ListAkunPemerintah()

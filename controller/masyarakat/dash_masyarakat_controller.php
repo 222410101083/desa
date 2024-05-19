@@ -15,32 +15,8 @@ class DashboardMasyarakatController
             ]);
         }
     }
-    static function ListProposal()
-    {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
-            header('Location: ' . BASEURL . 'login?auth=false');
-            exit;
-        } else {
-            // Ambil data akun pemerintah dari model
-            $proposals = Proposal::getProposalsByUserId($_SESSION['user']['id']);
-            view('masyarakat/dashboard/layout', [
-                'url' => 'proposal',
-                'proposals' => $proposals,
-            ]);
-        }
-    }
-    static function Proposal()
-    {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
-            header('Location: ' . BASEURL . 'login?auth=false');
-            exit;
-        }
-
-        // Menampilkan halaman tambah proposal
-        view('masyarakat/dashboard/layout', [
-            'url' => 'add',
-        ]);
-    }
+    
+    
     static function saveAddProposal()
     {
         if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {

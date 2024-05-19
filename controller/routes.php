@@ -22,6 +22,7 @@ Router::url('admin/tambahakun', 'get', 'AdminController::TambahAkunPemerintah');
 Router::url('admin/pemerintah', 'get', 'AdminController::ListAkunPemerintah');
 Router::url('admin/pemerintah/edit', 'get', 'AdminController::EditAkunPemerintah');
 Router::url('admin/pemerintah/hapus', 'get', 'AdminController::HapusAkunPemerintah');
+Router::url('admin/logout', 'get', 'AuthController::logout');
 #Admin POST
 Router::url('tambahakun/tambahakunpemerintah', 'post', 'AdminController::saveTambahAkunPemerintah');
 
@@ -32,14 +33,14 @@ Router::url('pemerintah/aduan', 'get', 'AduanPemerintahController::index');
 
 #Masyarakat
 Router::url('masyarakat/dashboard', 'get', 'DashboardMasyarakatController::index');
-Router::url('masyarakat/proposal', 'get', 'DashboardMasyarakatController::ListProposal');
-Router::url('masyarakat/add', 'get', 'DashboardMasyarakatController::Proposal');
-Router::url('proposal/view', 'get', 'DashboardMasyarakatController::viewProposalPDF');
+Router::url('masyarakat/proposal', 'get', 'ProposalMasyarakatController::ListProposal');
+Router::url('masyarakat/proposal/add', 'get', 'ProposalMasyarakatController::addProposal');
+Router::url('proposal/view', 'get', 'ProposalMasyarakatController::viewProposalPDF');
 Router::url('masyarakat/aduan', 'get', 'AduanController::indexByUser');
 Router::url('masyarakat/aduan/add', 'get', 'AduanController::create');
 
 #Masyarakat POST
-Router::url('add/saveAddProposal', 'post', 'DashboardMasyarakatController::saveAddProposal');
+Router::url('masyarakat/proposal/add', 'post', 'DashboardMasyarakatController::saveAddProposal');
 Router::url('masyarakat/aduan/add', 'post', 'AduanController::store');
 
 #Proposal
