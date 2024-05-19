@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 19, 2024 at 12:54 AM
+-- Generation Time: May 19, 2024 at 09:37 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `pweb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `aduan`
+--
+
+CREATE TABLE `aduan` (
+  `id_aduan` int NOT NULL,
+  `id_pengadu` int DEFAULT NULL,
+  `judul` varchar(200) NOT NULL,
+  `deskripsi` text NOT NULL,
+  `tanggal` datetime DEFAULT CURRENT_TIMESTAMP,
+  `kategori` enum('Infrastruktur','Kesehatan','Keamanan','Lainnya') NOT NULL,
+  `nama_pengadu` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `aduan`
+--
+
+INSERT INTO `aduan` (`id_aduan`, `id_pengadu`, `judul`, `deskripsi`, `tanggal`, `kategori`, `nama_pengadu`) VALUES
+(14, 158, 'Lomba Sepakbola', 'sadasdasd', '2024-05-19 16:29:14', 'Infrastruktur', 'Divo Tahta Imannulloh');
 
 -- --------------------------------------------------------
 
@@ -361,6 +384,30 @@ INSERT INTO `contacts` (`id`, `phone_number`, `owner`, `inserted_at`, `updated_a
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `masyarakat`
+--
+
+CREATE TABLE `masyarakat` (
+  `user_id` int NOT NULL,
+  `alamat` text NOT NULL,
+  `foto_profil` blob
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pemerintah`
+--
+
+CREATE TABLE `pemerintah` (
+  `user_id` int NOT NULL,
+  `jabatan` varchar(100) NOT NULL,
+  `foto_profil` blob
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `proposal`
 --
 
@@ -382,7 +429,8 @@ INSERT INTO `proposal` (`id_proposal`, `judul`, `deskripsi`, `tanggal_pengajuan`
 (13, 'Lomba Sepakbola', 'dsada', '2024-05-19 00:12:16', 'Diajukan', 158, './src/file/70a88f926def23489d45a825b4ac65f1.pdf'),
 (14, 'Ini Cara Desa Jatimulyo di Jember Maksimalkan RTH', 'asdsadasdasdsad', '2024-05-19 00:16:19', 'Diajukan', 158, './src/file/fe6e949a6cf33c068c58460a31992d6a.pdf'),
 (15, 'sdaasd', 'fafasfasf', '2024-05-19 00:16:41', 'Diajukan', 158, './src/file/8e3b122798585cb44e01cd93c3a3aa0f.pdf'),
-(16, 'Ini Cara Desa Jatimulyo di Jember Maksimalkan RTH', 'sadas', '2024-05-19 00:28:26', 'Diajukan', 163, './src/file/3b9fbef0b206d25dd09b331ebce46cc0.pdf');
+(16, 'Ini Cara Desa Jatimulyo di Jember Maksimalkan RTH', 'sadas', '2024-05-19 00:28:26', 'Diajukan', 163, './src/file/3b9fbef0b206d25dd09b331ebce46cc0.pdf'),
+(17, 'DIvo Tahta', 'dasdasdas', '2024-05-19 08:36:01', 'Diajukan', 158, './src/file/6bd54a7ed6ae22e37fc59539a38e9821.pdf');
 
 -- --------------------------------------------------------
 
@@ -410,11 +458,19 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `inserted_at`, `role`) V
 (160, 'Divo Tahta Imannulloh', 'divo2@gmail.com', '$2y$10$GSP0uZE5CMX//VHjjKv7h./Tb3Hn1G33LnFo9Neb5eq7vcAYwduOu', '2024-05-17 19:01:19', 'pemerintah'),
 (161, 'Divo Tahta Imannulloh', 'masyarakat@gmail.com', '$2y$10$KTCzSnfMpe87eDOkciSPd.twwPrJeTquAt.tLqYvHV4PADLT56evq', '2024-05-18 06:57:12', 'masyarakat'),
 (162, 'Divo Tahta Imannulloh', 'alansuroso2003@gmail.com', '$2y$10$e9vFw01EUC1.FYtaJaAzdeYOlP2GxN0yDVLHw10NAV850blkonqZG', '2024-05-18 22:30:11', 'pemerintah'),
-(163, 'Divo Tahta Imannulloh', 'divo3@gmail.com', '$2y$10$k/h.XhjQThEQZqWsEYXQvurl79sgYjoXoWMyPJgjzO.DzlCA1Z6Xm', '2024-05-19 00:26:22', 'masyarakat');
+(163, 'Divo Tahta Imannulloh', 'divo3@gmail.com', '$2y$10$k/h.XhjQThEQZqWsEYXQvurl79sgYjoXoWMyPJgjzO.DzlCA1Z6Xm', '2024-05-19 00:26:22', 'masyarakat'),
+(164, 'Divo Tahta Imannulloh', 'divomasyarakat@gmail.com', '$2y$10$3IFemaWd.m8AeT3BriesD.gWjfVz2cVlo8EYagJQv4IZ3JR4Zb6Eu', '2024-05-19 08:48:04', 'masyarakat');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `aduan`
+--
+ALTER TABLE `aduan`
+  ADD PRIMARY KEY (`id_aduan`),
+  ADD KEY `id_pengadu` (`id_pengadu`);
 
 --
 -- Indexes for table `cities`
@@ -429,6 +485,18 @@ ALTER TABLE `contacts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_fk` (`user_fk`),
   ADD KEY `city_fk` (`city_fk`);
+
+--
+-- Indexes for table `masyarakat`
+--
+ALTER TABLE `masyarakat`
+  ADD PRIMARY KEY (`user_id`);
+
+--
+-- Indexes for table `pemerintah`
+--
+ALTER TABLE `pemerintah`
+  ADD PRIMARY KEY (`user_id`);
 
 --
 -- Indexes for table `proposal`
@@ -449,6 +517,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `aduan`
+--
+ALTER TABLE `aduan`
+  MODIFY `id_aduan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
@@ -464,17 +538,23 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `proposal`
 --
 ALTER TABLE `proposal`
-  MODIFY `id_proposal` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_proposal` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `aduan`
+--
+ALTER TABLE `aduan`
+  ADD CONSTRAINT `aduan_ibfk_1` FOREIGN KEY (`id_pengadu`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `contacts`
@@ -482,6 +562,18 @@ ALTER TABLE `users`
 ALTER TABLE `contacts`
   ADD CONSTRAINT `contacts_ibfk_1` FOREIGN KEY (`user_fk`) REFERENCES `users` (`id`),
   ADD CONSTRAINT `contacts_ibfk_2` FOREIGN KEY (`city_fk`) REFERENCES `cities` (`id`);
+
+--
+-- Constraints for table `masyarakat`
+--
+ALTER TABLE `masyarakat`
+  ADD CONSTRAINT `masyarakat_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `pemerintah`
+--
+ALTER TABLE `pemerintah`
+  ADD CONSTRAINT `pemerintah_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `proposal`
