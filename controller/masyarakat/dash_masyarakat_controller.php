@@ -17,52 +17,52 @@ class DashboardMasyarakatController
     }
     
     
-    static function saveAddProposal()
-    {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
-            header('Location: ' . BASEURL . 'login?auth=false');
-            exit;
-        }
+    // static function saveAddProposal()
+    // {
+    //     if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
+    //         header('Location: ' . BASEURL . 'login?auth=false');
+    //         exit;
+    //     }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $judul = $_POST['judul'];
-            $deskripsi = $_POST['deskripsi'];
-            $tanggal_pengajuan = date('Y-m-d H:i:s'); // Mengambil tanggal dan waktu saat ini
-            $status = 'Diajukan';
-            $id_user = $_SESSION['user']['id'];
+    //     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    //         $judul = $_POST['judul'];
+    //         $deskripsi = $_POST['deskripsi'];
+    //         $tanggal_pengajuan = date('Y-m-d H:i:s'); // Mengambil tanggal dan waktu saat ini
+    //         $status = 'Diajukan';
+    //         $id_user = $_SESSION['user']['id'];
 
-            // Handle file upload
-            if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
-                $fileTmpPath = $_FILES['file']['tmp_name'];
-                $fileName = $_FILES['file']['name'];
-                $fileSize = $_FILES['file']['size'];
-                $fileType = $_FILES['file']['type'];
-                $fileNameCmps = explode(".", $fileName);
-                $fileExtension = strtolower(end($fileNameCmps));
+    //         // Handle file upload
+    //         if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
+    //             $fileTmpPath = $_FILES['file']['tmp_name'];
+    //             $fileName = $_FILES['file']['name'];
+    //             $fileSize = $_FILES['file']['size'];
+    //             $fileType = $_FILES['file']['type'];
+    //             $fileNameCmps = explode(".", $fileName);
+    //             $fileExtension = strtolower(end($fileNameCmps));
 
-                // Cek apakah file adalah PDF
-                if ($fileExtension == 'pdf') {
-                    $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-                    $uploadFileDir = './src/file/';
-                    $dest_path = $uploadFileDir . $newFileName;
-                    $dest_path = $uploadFileDir . $newFileName;
-                    if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                        // Simpan data proposal ke database
-                        Proposal::tambahProposal($judul, $deskripsi, $tanggal_pengajuan, $dest_path, $status, $id_user);
-                        header('Location: ' . BASEURL . '/masyarakat/dashboard?upload=success');
-                    } else {
-                        header('Location: ' . BASEURL . '/masyarakat/dashboard?upload=error');
-                    }
-                } else {
-                    header('Location: ' . BASEURL . '/masyarakat/dashboard?upload=error');
-                }
-            }
-        } else {
-            // Redirect back to the form if the request method is not POST
-            header('Location: ' . BASEURL . '/masyarakat/dashboard?upload=error'); // Redirect back to the form if the request method is not POST
+    //             // Cek apakah file adalah PDF
+    //             if ($fileExtension == 'pdf') {
+    //                 $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+    //                 $uploadFileDir = './src/file/';
+    //                 $dest_path = $uploadFileDir . $newFileName;
+    //                 $dest_path = $uploadFileDir . $newFileName;
+    //                 if (move_uploaded_file($fileTmpPath, $dest_path)) {
+    //                     // Simpan data proposal ke database
+    //                     Proposal::tambahProposal($judul, $deskripsi, $tanggal_pengajuan, $dest_path, $status, $id_user);
+    //                     header('Location: ' . BASEURL . '/masyarakat/dashboard?upload=success');
+    //                 } else {
+    //                     header('Location: ' . BASEURL . '/masyarakat/dashboard?upload=error');
+    //                 }
+    //             } else {
+    //                 header('Location: ' . BASEURL . '/masyarakat/dashboard?upload=error');
+    //             }
+    //         }
+    //     } else {
+    //         // Redirect back to the form if the request method is not POST
+    //         header('Location: ' . BASEURL . '/masyarakat/dashboard?upload=error'); // Redirect back to the form if the request method is not POST
 
-        }
-    }
+    //     }
+    // }
     // static function admin() {
     //     if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
     //         header('Location: '.BASEURL.'login?auth=false');

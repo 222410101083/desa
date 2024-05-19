@@ -25,8 +25,8 @@ include 'view/master.php'; ?>
                     <td class="py-3 px-4"><?= htmlspecialchars($proposal['status']) ?></td>
                     <td class="py-3 px-4 flex justify-center items-center">
                         <a href="/pweb/<?= $proposal['file_path'] ?>" class="text-blue-500 hover:text-blue-700 ml-4"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat</button></a>
-                        <a href="edit.php?id=<?= $proposal['id_proposal'] ?>" class="text-green-500 hover:text-green-700 ml-4"><button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Edit</button></a>
-                        <a href="delete.php" class="text-red-500 hover:text-red-700 ml-4"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Hapus</button></a>
+                        <a href="edit.php?id=<?= $proposal['id_proposal'] ?>" class="text-green-500 hover:text-green-700 ml-4"><button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Setujui</button></a>
+                        <a href="delete.php" class="text-red-500 hover:text-red-700 ml-4"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Tolak</button></a>
                     </td>
                 </tr>
             <?php endforeach; ?>     

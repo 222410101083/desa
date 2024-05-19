@@ -44,7 +44,22 @@ class Proposal
         $conn->close();
         return $rows;
     }
-    
+
+    public static function getProposalById($id)
+    {
+        global $conn;
+        $query = "SELECT * FROM proposal WHERE id_proposal = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            return $result->fetch_assoc();
+        } else {
+            return null;
+        }
+    }
+
     // Metode untuk mengambil proposal berdasarkan ID pengguna
     public static function getProposalsByUserId($user_id)
     {
@@ -69,6 +84,43 @@ class Proposal
         $proposals = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
         return $proposals;
+    }
+
+    public static function updateProposal($id_proposal, $judul, $deskripsi, $tanggal_pengajuan, $file_path, $status)
+    {
+        global $conn;
+        if ($file_path !== null) {
+            // Jika file_path diberikan, update semua informasi termasuk file_path
+            $sql = "UPDATE proposal SET judul=?, deskripsi=?, tanggal_pengajuan=?, file_path=?, status=? WHERE id_proposal=?";
+            $stmt = $conn->prepare($sql);
+            if ($stmt === false) {
+                throw new Exception("MySQL prepare error: " . $conn->error);
+            }
+            $stmt->bind_param('sssssi', $judul, $deskripsi, $tanggal_pengajuan, $file_path, $status, $id_proposal);
+        } else {
+            // Jika tidak ada perubahan pada file, tidak perlu update file_path
+            $sql = "UPDATE proposal SET judul=?, deskripsi=?, tanggal_pengajuan=?, status=? WHERE id_proposal=?";
+            $stmt = $conn->prepare($sql);
+            if ($stmt === false) {
+                throw new Exception("MySQL prepare error: " . $conn->error);
+            }
+            $stmt->bind_param('ssssi', $judul, $deskripsi, $tanggal_pengajuan, $status, $id_proposal);
+        }
+
+        $stmt->execute();
+        if ($stmt->error) {
+            throw new Exception("Execute error: " . $stmt->error);
+        }
+        $stmt->close();
+    }
+
+    static function destroyProposal($id)
+    {
+        global $conn;
+        $sql = "DELETE FROM proposal WHERE id_proposal = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
     }
 }
 ?>

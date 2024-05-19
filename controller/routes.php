@@ -29,19 +29,29 @@ Router::url('tambahakun/tambahakunpemerintah', 'post', 'AdminController::saveTam
 #Pemerintah
 Router::url('pemerintah/dashboard', 'get', 'DashboardPemerintahController::index');
 Router::url('pemerintah/proposal', 'get', 'DashboardPemerintahController::ListProposal');
+Router::url('pemerintah/proposal/edit', 'get', 'DashboardPemerintahController::EditProposal');
 Router::url('pemerintah/aduan', 'get', 'AduanPemerintahController::index');
+Router::url('pemerintah/aduan/delete', 'get', 'AduanPemerintahController::delete');
+Router::url('pemerintah/logout', 'get', 'AuthController::logout');
 
 #Masyarakat
 Router::url('masyarakat/dashboard', 'get', 'DashboardMasyarakatController::index');
 Router::url('masyarakat/proposal', 'get', 'ProposalMasyarakatController::ListProposal');
 Router::url('masyarakat/proposal/add', 'get', 'ProposalMasyarakatController::addProposal');
+Router::url('masyarakat/proposal/edit', 'get', 'ProposalMasyarakatController::showEditProposal');
 Router::url('proposal/view', 'get', 'ProposalMasyarakatController::viewProposalPDF');
 Router::url('masyarakat/aduan', 'get', 'AduanController::indexByUser');
 Router::url('masyarakat/aduan/add', 'get', 'AduanController::create');
+Router::url('masyarakat/logout', 'get', 'AuthController::logout');
+
 
 #Masyarakat POST
-Router::url('masyarakat/proposal/add', 'post', 'DashboardMasyarakatController::saveAddProposal');
+Router::url('masyarakat/proposal/add', 'post', 'ProposalMasyarakatController::storeProposal');
+Router::url('masyarakat/proposal/edit', 'post', 'ProposalMasyarakatController::editProposal');
+Router::url('masyarakat/proposal/delete', 'get', 'ProposalMasyarakatController::removeProposal');
+
 Router::url('masyarakat/aduan/add', 'post', 'AduanController::store');
+
 
 #Proposal
 
