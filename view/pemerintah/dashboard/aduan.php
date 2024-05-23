@@ -1,6 +1,7 @@
 <?php include 'view/master.php'; ?>
 <div class="container mx-auto px-4">
     <h1 class="text-2xl font-bold text-gray-900 my-4">Daftar Aduan</h1>
+    <input type="text" id="searchInput" placeholder="Cari Aduan" class="mb-4 px-4 py-2 border rounded">
     <!-- <a href="aduan/add" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Buat Aduan Baru</a> -->
     <table class="table-auto w-full mt-4">
         <thead>
@@ -14,17 +15,33 @@
             </tr>
         </thead>
         <tbody>
-            <?php $no = 1; foreach ($aduans as $aduan): ?>
-            <tr class="text-center">
-                <td class="border px-4 py-2"><?= $no++; ?></td>
-                <td class="border px-4 py-2"><?= htmlspecialchars($aduan['nama_pengadu']) ?></td> <!-- Menggunakan kunci 'nama_pengadu' -->
-                <td class="border px-4 py-2"><?= htmlspecialchars($aduan['judul']) ?></td>
-                <td class="border px-4 py-2"><?= htmlspecialchars($aduan['deskripsi']) ?></td>
-                <td class="border px-4 py-2"><?= htmlspecialchars($aduan['kategori']) ?></td>
-                <td class="border px-4 py-2"><?= htmlspecialchars($aduan['tanggal']) ?></td>
-            </tr>
+            <?php $no = 1;
+            foreach ($aduans as $aduan): ?>
+                <tr class="text-center">
+                    <td class="border px-4 py-2"><?= $no++; ?></td>
+                    <td class="border px-4 py-2"><?= $aduan['nama_pengadu'] ?></td>
+                    <td class="border px-4 py-2"><?= $aduan['judul'] ?></td>
+                    <td class="border px-4 py-2"><?= $aduan['deskripsi'] ?></td>
+                    <td class="border px-4 py-2"><?= $aduan['kategori'] ?></td>
+                    <td class="border px-4 py-2"><?= $aduan['tanggal'] ?></td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 </div>
-    </table>
+
+<script>
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    var searchText = this.value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '<?=urlpath("pemerintah/aduan/cari")?>?query=' + searchText, true);
+    console.log(xhr);
+    xhr.onload = function() {
+        if (this.status === 200) {
+            document.querySelector('tbody').innerHTML = this.responseText;
+        }
+    }
+    xhr.send();
+});
+</script>
+

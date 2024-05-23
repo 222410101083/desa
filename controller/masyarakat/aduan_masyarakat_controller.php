@@ -40,8 +40,11 @@ class AduanController
                 'judul' => $post['judul'],
                 'deskripsi' => $post['deskripsi'],
                 'kategori' => $post['kategori'],
-                'tanggal' => date('Y-m-d H:i:s') // Menambahkan tanggal saat ini
+                'tanggal' => date('Y-m-d H:i:s'), // Menambahkan tanggal saat ini
+                'nama_pengadu' => $_SESSION['user']['name']
             ]);
+            // var_dump($_SESSION['user']['name']);
+            //     die();
             // Menyiapkan data untuk disimpan ke database
 
             // Memanggil model untuk menyimpan data
@@ -86,4 +89,23 @@ class AduanController
             header('Location: ' . BASEURL . 'aduan/index?status=error');
         }
     }
+    // static function destroyAduan()
+    // {
+    //     if (!isset($_SESSION['user'])) {
+    //         header('Location: ' . BASEURL . 'login?auth=false');
+    //         exit;
+    //     } else {
+    //         $id_aduan = $_GET['id'];
+    //         $aduan = Aduan::getProposalById($id_proposal);
+
+    //         // Cek jika proposal sudah disetujui
+    //         if ($proposal['status'] === 'Disetujui') {
+    //             header('Location: ' . BASEURL . 'masyarakat/proposal?delete=denied');
+    //             exit;
+    //         }
+
+    //         Proposal::destroyProposal($id_proposal);
+    //         header('Location: ' . BASEURL . 'masyarakat/proposal?delete=success');
+    //     }
+    // }
 }

@@ -87,8 +87,13 @@ class User
         return $result;
     }
 
-    static function update($data = [])
+    static function updateUser($id, $email, $password)
     {
+        global $conn;
+        $sql = "UPDATE users SET email = ?, password = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssi", $email, $password, $id);
+        $stmt->execute();
     }
 
     static function delete($id = '')
@@ -129,5 +134,21 @@ class User
         $result = $stmt->affected_rows > 0 ? true : false; // Cek apakah query berhasil
         $stmt->close(); // Tutup statement
         return $result; // Kembalikan hasil query
-        }
     }
+    static function getUserByEmail($email)
+    {
+        global $conn;
+        $sql = "SELECT * FROM users WHERE email = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+
+        $stmt->close();
+
+        return $user;
+    }
+
+}

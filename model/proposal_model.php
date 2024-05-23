@@ -10,16 +10,16 @@ class Proposal
     }
 
     // Metode untuk menambahkan proposal baru dengan path file
-    public static function tambahProposal($judul, $deskripsi, $tanggal_pengajuan, $file_path, $status, $id_user)
+    public static function tambahProposal($judul, $deskripsi, $tanggal_pengajuan, $file_path, $status, $id_user, $nama_pengaju)
     {
         // error_log("Inserting: $judul, $deskripsi, $tanggal_pengajuan, $file_path, $status, $id_user");
-        $sql = "INSERT INTO proposal (judul, deskripsi, tanggal_pengajuan, file_path, status, id_user) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO proposal (judul, deskripsi, tanggal_pengajuan, file_path, status, id_user, nama_pengaju) VALUES (?, ?, ?, ?, ?, ?, ?)";
         global $conn; // Pastikan $conn adalah instance dari koneksi database yang aktif
         $stmt = $conn->prepare($sql);
         if ($stmt === false) {
             throw new Exception("MySQL prepare error: " . $conn->error);
         }
-        $stmt->bind_param('sssssi', $judul, $deskripsi, $tanggal_pengajuan, $file_path, $status, $id_user);
+        $stmt->bind_param('sssssis', $judul, $deskripsi, $tanggal_pengajuan, $file_path, $status, $id_user, $nama_pengaju);
         $stmt->execute();
         if ($stmt->error) {
             throw new Exception("Execute error: " . $stmt->error);
@@ -156,6 +156,16 @@ class Proposal
         }
         $stmt->close();
         $conn->close();
+    }
+    public static function getFilteredProposal($searchText)
+    {
+        global $conn;
+        $sql = "SELECT * FROM proposal WHERE status LIKE ? OR judul LIKE ? OR deskripsi LIKE ?  OR nama_pengaju LIKE ? OR tanggal_pengajuan LIKE ?";
+        $stmt = $conn->prepare($sql);
+        $searchText = "%$searchText%";
+        $stmt->bind_param("sssss", $searchText, $searchText, $searchText, $searchText, $searchText);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }
 ?>

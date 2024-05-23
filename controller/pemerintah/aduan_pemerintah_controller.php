@@ -4,7 +4,7 @@ include_once 'model/aduan_model.php';
 
 class AduanPemerintahController
 {
-    public static function index() 
+    public static function index()
     {
         // Pastikan pengguna sudah login
         if (!isset($_SESSION['user'])) {
@@ -84,4 +84,27 @@ class AduanPemerintahController
             header('Location: ' . BASEURL . 'aduan/index?status=error');
         }
     }
+    public static function cariAduan()
+    {
+        $searchText = $_GET['query'] ?? '';
+        $aduans = Aduan::cariAduan($searchText);
+        $no = 1;
+        foreach ($aduans as $aduan) {
+            echo "<tr class='border-b border-gray-200'>";
+            echo "<td class='py-3 px-4'>" . $no++ . "</td>";
+            echo "<td class='py-3 px-4'>" . $aduan['nama_pengadu'] . "</td>";
+            echo "<td class='py-3 px-4'>" . $aduan['judul'] . "</td>";
+            echo "<td class='py-3 px-4'>" . $aduan['deskripsi'] . "</td>";
+            echo "<td class='py-3 px-4'>" . $aduan['kategori'] . "</td>";
+            echo "<td class='py-3 px-4'>" . $aduan['tanggal'] . "</td>";
+            echo "<td class='py-3 px-4 flex justify-center items-center'>";
+            // echo "<a href='/pweb/" . $aduan['file_path'] . "' class='text-blue-500 hover:text-blue-700 ml-4'>";
+            // echo "<button class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Lihat</button></a>";
+            // echo "<a href='" . urlpath("pemerintah/proposal/ubahstatus?id=" . $aduan['id_proposal']) . "' class='text-green-500 hover:text-green-700 ml-4'>";
+            // echo "<button class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>Aksi</button></a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+    }
 }
+

@@ -44,6 +44,14 @@ class AuthController {
     static function saveRegister() {
         $post = array_map('htmlspecialchars', $_POST);
 
+        // Periksa apakah email sudah terdaftar
+        $existingUser = User::getUserByEmail($post['email']);
+        if ($existingUser) {
+            header('Location: '.BASEURL.'register?error=user_exists');
+            exit; // Berhenti eksekusi lebih lanjut
+        }
+
+        // Lanjutkan proses registrasi jika email belum terdaftar
         $user = User::register([
             'name' => $post['name'], 
             'email' => $post['email'], 

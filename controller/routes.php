@@ -31,8 +31,11 @@ Router::url('pemerintah/dashboard', 'get', 'DashboardPemerintahController::index
 Router::url('pemerintah/proposal', 'get', 'DashboardPemerintahController::ListProposal');
 Router::url('pemerintah/proposal/ubahstatus', 'get', 'ProposalPemerintahController::showUbahStatusProposal');
 Router::url('pemerintah/aduan', 'get', 'AduanPemerintahController::index');
+Router::url('pemerintah/aduan/cari', 'get', 'AduanPemerintahController::cariAduan');
 Router::url('pemerintah/aduan/delete', 'get', 'AduanPemerintahController::delete');
 Router::url('pemerintah/logout', 'get', 'AuthController::logout');
+Router::url('pemerintah/aduan/', 'get', 'AduanPemerintahController::cariAduan');
+Router::url('pemerintah/proposal/cari', 'get', 'ProposalPemerintahController::getFilteredProposal');
 
 #Pemerintah POST
 Router::url('pemerintah/proposal/ubahstatus', 'post', 'ProposalPemerintahController::ubahStatusProposal');
@@ -42,10 +45,15 @@ Router::url('masyarakat/dashboard', 'get', 'DashboardMasyarakatController::index
 Router::url('masyarakat/proposal', 'get', 'ProposalMasyarakatController::ListProposal');
 Router::url('masyarakat/proposal/add', 'get', 'ProposalMasyarakatController::addProposal');
 Router::url('masyarakat/proposal/edit', 'get', 'ProposalMasyarakatController::showEditProposal');
+Router::url('masyarakat/proposal/cari', 'get', 'ProposalMasyarakatController::getFilteredProposal');
 Router::url('proposal/view', 'get', 'ProposalMasyarakatController::viewProposalPDF');
 Router::url('masyarakat/aduan', 'get', 'AduanController::indexByUser');
 Router::url('masyarakat/aduan/add', 'get', 'AduanController::create');
+Router::url('masyarakat/aduan/cari', 'get', 'AduanController::cariAduan');
+Router::url('masyarakat/aduan/destroy', 'get', 'AduanController::delete');
+
 Router::url('masyarakat/logout', 'get', 'AuthController::logout');
+
 
 
 #Masyarakat POST

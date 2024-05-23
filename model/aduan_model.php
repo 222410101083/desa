@@ -20,9 +20,10 @@ class Aduan {
 
     static function insert($data=[]) {
         global $conn;
-        $sql = "INSERT INTO Aduan (id_pengadu, judul, deskripsi, kategori) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO Aduan (id_pengadu, judul, deskripsi, kategori, nama_pengadu) VALUES (?, ?, ?, ?, ?)";
+
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("isss", $data['id_pengadu'], $data['judul'], $data['deskripsi'], $data['kategori']);
+        $stmt->bind_param("issss", $data['id_pengadu'], $data['judul'], $data['deskripsi'], $data['kategori'], $data['nama_pengadu']);
         $stmt->execute();
         $result = $stmt->affected_rows > 0 ? true : false;
         $stmt->close();
@@ -84,4 +85,24 @@ class Aduan {
         $conn->close();
         return $rows;
     }
+
+    public static function cariAduan($searchText)
+    {
+        global $conn;
+        $sql = "SELECT * FROM aduan WHERE judul LIKE ? OR deskripsi LIKE ? OR tanggal LIKE ? OR kategori LIKE ? OR nama_pengadu LIKE ?";
+        $stmt = $conn->prepare($sql);
+        $searchText = "%$searchText%";
+        $stmt->bind_param("sssss", $searchText, $searchText, $searchText, $searchText, $searchText);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+    
+    // public static function cariAduan($keyword) {
+    //     global $conn;
+    //     $stmt = $conn->prepare("SELECT * FROM aduan WHERE nama_pengadu LIKE ? OR judul LIKE ?");
+    //     $searchTerm = '%' . $keyword . '%';
+    //     $stmt->bind_param("ss", $searchTerm, $searchTerm);
+    //     $stmt->execute();
+    //     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    // }
 }
