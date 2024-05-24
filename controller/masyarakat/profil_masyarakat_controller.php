@@ -14,8 +14,16 @@ class ProfilMasyarakatController {
     // View profile by ID
     public static function viewProfile($id) {
         $data = MasyarakatModel::getMasyarakatById($id);
-        return $data;
+        // return $data;
+        var_dump($data);
+        die();
+
+        // view('masyarakat/dashboard/layout', [
+        //     'url' => 'profil',
+        //     'profilData' => $data,
+        // ]);
     }
+}
 
     // // Update profile
     // public static function updateProfile($id, $telepon, $nik, $id_users, $name, $email, $password) {
@@ -29,8 +37,6 @@ class ProfilMasyarakatController {
     //     $data = User::getUser();
     //     return $data;
 
-    // }
+    // } 
 
-
-}
 
