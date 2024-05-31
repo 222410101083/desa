@@ -122,7 +122,7 @@ $style = ob_get_clean();
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('upload') === 'error') {
             alert('Terjadi kesalahan saat mengunggah file. Silakan coba lagi.');
@@ -132,4 +132,3 @@ $style = ob_get_clean();
 
 <?php $body = ob_get_clean(); ?>
 <?php include 'view/master.php'; ?>
-

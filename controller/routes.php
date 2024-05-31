@@ -51,7 +51,7 @@ Router::url('masyarakat/aduan', 'get', 'AduanController::indexByUser');
 Router::url('masyarakat/aduan/add', 'get', 'AduanController::create');
 Router::url('masyarakat/aduan/cari', 'get', 'AduanController::cariAduan');
 Router::url('masyarakat/aduan/destroy', 'get', 'AduanController::delete');
-Router::url('masyarakat/profil', 'get', 'ProfilMasyarakatController::viewProfile');
+Router::url('masyarakat/profil', 'get', 'DashboardMasyarakatController::profil');
 
 Router::url('masyarakat/logout', 'get', 'AuthController::logout');
 

@@ -150,5 +150,4 @@ class User
 
         return $user;
     }
-
 }

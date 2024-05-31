@@ -43,6 +43,7 @@ class AdminController
             'email' => $post['email'],
             'password' => $post['password'],
             'role' => $post['role']
+            
         ]);
 
         if ($user) {

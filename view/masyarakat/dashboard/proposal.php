@@ -2,7 +2,7 @@
 include 'view/master.php';
 // session_start();
 // ob_start();
-$style = ob_get_clean();
+// $style = ob_get_clean();
 ?>
 <div class="container mx-auto px-4">
     <h1 class="text-2xl font-bold text-left my-6">Daftar Proposal</h1>
