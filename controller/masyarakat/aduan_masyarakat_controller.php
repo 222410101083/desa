@@ -89,23 +89,5 @@ class AduanController
             header('Location: ' . BASEURL . 'aduan/index?status=error');
         }
     }
-    // static function destroyAduan()
-    // {
-    //     if (!isset($_SESSION['user'])) {
-    //         header('Location: ' . BASEURL . 'login?auth=false');
-    //         exit;
-    //     } else {
-    //         $id_aduan = $_GET['id'];
-    //         $aduan = Aduan::getProposalById($id_proposal);
-
-    //         // Cek jika proposal sudah disetujui
-    //         if ($proposal['status'] === 'Disetujui') {
-    //             header('Location: ' . BASEURL . 'masyarakat/proposal?delete=denied');
-    //             exit;
-    //         }
-
-    //         Proposal::destroyProposal($id_proposal);
-    //         header('Location: ' . BASEURL . 'masyarakat/proposal?delete=success');
-    //     }
-    // }
+    
 }

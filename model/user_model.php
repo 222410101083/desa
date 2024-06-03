@@ -150,4 +150,49 @@ class User
 
         return $user;
     }
+    public static function updateProfil($id, $name, $email, $nomor_hp, $avatar)
+    {
+        global $conn;
+
+        $sql = "UPDATE users SET name = ?, email = ?, nomor_hp = ?, avatar = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            error_log('Prepare failed: ' . htmlspecialchars($conn->error));
+            return false;
+        }
+
+        $bind = $stmt->bind_param("ssssi", $name, $email, $nomor_hp, $avatar, $id);
+        if ($bind === false) {
+            error_log('Bind param failed: ' . htmlspecialchars($stmt->error));
+            return false;
+        }
+
+        $execute = $stmt->execute();
+        if ($execute === false) {
+            error_log('Execute failed: ' . htmlspecialchars($stmt->error));
+            return false;
+        }
+
+        $stmt->close();
+        $conn->close();
+        return true;
+    }
+    public static function emailExists($email) {
+        global $conn;
+        $sql = "SELECT 1 FROM users WHERE email = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    }
+
+    public static function checkEmailExists($email, $currentUserId) {
+        global $conn;
+        $stmt = $conn->prepare("SELECT id FROM users WHERE email = ? AND id != ?");
+        $stmt->bind_param("si", $email, $currentUserId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    }
 }

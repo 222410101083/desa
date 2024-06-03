@@ -15,16 +15,16 @@ class DashboardMasyarakatController
             ]);
         }
     }
-    static function profil() {
-            if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
-                header('Location: '.BASEURL.'login?auth=false');
-                exit;
-            }
-            else {
-                view('masyarakat/dashboard/layout', ['url' => 'profil', 'user' => $_SESSION['user']]);
+    // static function profil() {
+    //         if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
+    //             header('Location: '.BASEURL.'login?auth=false');
+    //             exit;
+    //         }
+    //         else {
+    //             view('masyarakat/dashboard/layout', ['url' => 'profil', 'user' => $_SESSION['user']]);
                 
-            }
-        }
+    //         }
+    //     }
     
     
     // static function saveAddProposal()

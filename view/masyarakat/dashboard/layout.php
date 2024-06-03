@@ -4,9 +4,9 @@ $user = $_SESSION['user'];
 ?>
 
 <?php
-// session_start();
-ob_start();
+
 include 'style.css';
+
 $style = ob_get_clean();
 ?>
 <div class="flex flex-warp w-full justify-beetwen">
@@ -130,5 +130,4 @@ $style = ob_get_clean();
     });
 </script>
 
-<?php $body = ob_get_clean(); ?>
 <?php include 'view/master.php'; ?>

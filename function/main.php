@@ -18,13 +18,50 @@ class Router {
             )
         );
 
+        // Cek jika pengguna sudah login
+        if (isset($_SESSION['user'])) {
+            $role = $_SESSION['user']['role'];
+            $dashboard = $this->determineDashboard($role);
+
+            // Cek jika URL adalah halaman login
+            if (strpos($url, 'login') !== false) {
+                header('Location: '.BASEURL.$dashboard);
+                exit;
+            }
+
+            // Cek jika URL mengandung dashboard yang tidak sesuai dengan peran pengguna
+            if (strpos($url, 'dashboard') !== false && strpos($url, $dashboard) === false) {
+                header('Location: '.BASEURL.$dashboard);
+                exit;
+            }
+        }
+
         if (!in_array($url, self::$urls['routes'])) {
-            header('Location: '.BASEURL);
+            if (isset($_SESSION['user'])) {
+                header('Location: '.BASEURL.$dashboard);
+            } else {
+                header('Location: '.BASEURL);
+            }
+            exit;
         }
 
         $call = self::$urls[$_SERVER['REQUEST_METHOD']][$url];
         $call();
     }
+
+    private function determineDashboard($role) {
+        switch ($role) {
+            case 'admin':
+                return 'admin/dashboard';
+            case 'pemerintah':
+                return 'pemerintah/dashboard';
+            case 'masyarakat':
+                return 'masyarakat/dashboard';
+            default:
+                return 'login'; // Default redirect jika peran tidak dikenali
+        }
+    }
+
     public static function url($url, $method, $callback) {
         if ($url == '/') { $url = ''; }
         self::$urls[strtoupper($method)][$url] = $callback;
