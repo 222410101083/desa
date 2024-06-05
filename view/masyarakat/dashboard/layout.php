@@ -110,7 +110,7 @@ $style = ob_get_clean();
             </ul>
         </div>
     </aside>
-    <main class="flex h-full">
+    <main class="flex h-full w-full">
         <?php
         if (isset($url)) {
             include $url . '.php';

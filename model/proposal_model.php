@@ -41,7 +41,33 @@ class Proposal
             }
         }
         $result->free();
-        $conn->close();
+        return $rows;
+    }
+    public static function getApprovedProposals()
+    {
+        global $conn;
+        $query = "SELECT * FROM proposal WHERE status = 'disetujui'";
+        $result = $conn->query($query);
+        $rows = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+        }
+        return $rows;
+    }
+
+    public static function getDeclinedProposals()
+    {
+        global $conn;
+        $query = "SELECT * FROM proposal WHERE status = 'ditolak'";
+        $result = $conn->query($query);
+        $rows = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+        }
         return $rows;
     }
 

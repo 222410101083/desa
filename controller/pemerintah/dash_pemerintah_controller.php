@@ -9,8 +9,14 @@ class DashboardPemerintahController {
             exit;
         }   
         else {
+            $proposals = Proposal::getAllProposals();
+            $approvedProposals = Proposal::getApprovedProposals();
+            $declinedProposals = Proposal::getDeclinedProposals();
             view('pemerintah/dashboard/layout', [
                 'url' => 'home',
+                'proposals' => $proposals,
+                'approvedProposals' => $approvedProposals,  
+                'declinedProposals' => $declinedProposals,
             ]);
         }
     }
@@ -25,6 +31,21 @@ class DashboardPemerintahController {
             view('pemerintah/dashboard/layout', [
                 'url' => 'proposal',
                 'proposals' => $proposals,
+            ]);
+        }
+    }
+    static function grafikProposal()
+    {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'pemerintah') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        } else {
+            $proposals = Proposal::getAllProposals();
+            $approvedProposals = Proposal::getApprovedProposals();
+            view('pemerintah/dashboard/layout', [
+                'url' => 'grafik',
+                'proposals' => $proposals,
+                'approvedProposals' => $approvedProposals,
             ]);
         }
     }

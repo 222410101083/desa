@@ -9,7 +9,6 @@ class ProposalPemerintahController
             header('Location: ' . BASEURL . 'login?auth=false');
             exit;
         } else {
-            // Ambil data akun pemerintah dari model
             $proposals = Proposal::getProposalsByUserId($_SESSION['user']['id']);
             view('pemerintah/dashboard/layout', [
                 'url' => 'proposal',
@@ -17,54 +16,6 @@ class ProposalPemerintahController
             ]);
         }
     }
-
-    static function storeProposal()
-    {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'pemerintah') {
-            header('Location: ' . BASEURL . 'login?auth=false');
-            exit;
-        }
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $judul = $_POST['judul'];
-            $deskripsi = $_POST['deskripsi'];
-            $tanggal_pengajuan = date('Y-m-d H:i:s'); // Mengambil tanggal dan waktu saat ini
-            $status = 'Diajukan';
-            $id_user = $_SESSION['user']['id'];
-
-            // Handle file upload
-            if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
-                $fileTmpPath = $_FILES['file']['tmp_name'];
-                $fileName = $_FILES['file']['name'];
-                $fileSize = $_FILES['file']['size'];
-                $fileType = $_FILES['file']['type'];
-                $fileNameCmps = explode(".", $fileName);
-                $fileExtension = strtolower(end($fileNameCmps));
-
-                // Cek apakah file adalah PDF
-                if ($fileExtension == 'pdf') {
-                    $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-                    $uploadFileDir = './src/file/';
-                    $dest_path = $uploadFileDir . $newFileName;
-                    $dest_path = $uploadFileDir . $newFileName;
-                    if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                        // Simpan data proposal ke database
-                        Proposal::tambahProposal($judul, $deskripsi, $tanggal_pengajuan, $dest_path, $status, $id_user);
-                        header('Location: ' . BASEURL . '/pemerintah/proposal?upload=success');
-                    } else {
-                        header('Location: ' . BASEURL . '/pemerintah/proposal?upload=error');
-                    }
-                } else {
-                    header('Location: ' . BASEURL . '/pemerintah/proposal?upload=error');
-                }
-            }
-        } else {
-            // Redirect back to the form if the request method is not POST
-            header('Location: ' . BASEURL . '/pemerintah/proposal?upload=error'); // Redirect back to the form if the request method is not POST
-
-        }
-    }
-
     static function showEditProposal()
     {
         $id_proposal = $_GET['id'];
@@ -216,22 +167,14 @@ class ProposalPemerintahController
             header('Location: ' . BASEURL . 'pemerintah/proposal?status=error');
         }
     }
-    public static function getFilteredProposals()
-    {
-        $searchText = $_GET['query'] ?? '';
-        $proposals = Proposal::getFilteredProposal($searchText);
-        foreach ($proposals as $proposal) {
-
-            echo "<tr class='border-b border-gray-200 ...'>"; // lengkapi dengan data yang sesuai
-            echo "<td class='px-6 py-4 whitespace-no-wrap text-sm leading-5 font-medium text-gray-900'>"; // leng
-            echo "<div class='text-sm leading-5 font-medium text-gray-900'>"; // lengkapi dengan data yang sesuai
-            echo "<div class='text-sm leading-5 font-medium text-gray-900'>"; // lengkapi dengan data yang sesuai
-            echo "<div class='text-sm leading-5 font-medium text-gray-900'>"; // lengkapi dengan data yang sesuai
-            echo "<div class='text-sm leading-5 font-medium text-gray-900'>"; // lengkapi dengan data yang sesuai
-            echo "<div class='text-sm leading-5 font-medium text-gray-900'>"; // lengkapi dengan data yang sesuai
-            echo "</tr>";
-        }
-    }
+    // public static function getFilteredProposals()
+    // {
+    //     // die(); 
+    //     $searchText = $_GET['query'] ?? '';
+    //     $proposals = Proposal::getFilteredProposal($searchText);
+    //     foreach ($proposals as $proposal) {
+    //     }
+    // }
 
     public static function getFilteredProposal()
     {
@@ -255,9 +198,9 @@ class ProposalPemerintahController
             echo "<td class='py-3 px-4'>" . $proposal['nama_pengaju'] . "</td>";
             echo "<td class='py-3 px-4'>" . $proposal['status'] . "</td>";
             echo "<td class='py-3 px-4 flex justify-center items-center'>";
-            echo "<a href='/pweb/" . $proposal['file_path'] . "' class='text-blue-500 hover:text-blue-700 ml-4'>";
+            echo "<a href='" . BASEURL . $proposal['file_path'] . "' class='text-blue-500 hover:text-blue-700 ml-4'>";
             echo "<button class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Lihat</button></a>";
-            echo "<a href='" . urlpath("pemerintah/proposal/ubahstatus?id=" . $proposal['id_proposal']) . "' class='text-green-500 hover:text-green-700 ml-4'>";
+            echo "<a href='" . BASEURL . "pemerintah/proposal/ubahstatus?id=" . $proposal['id_proposal'] . "' class='text-green-500 hover:text-green-700 ml-4'>";
             echo "<button class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>Aksi</button></a>";
             echo "</td>";
             echo "</tr>";

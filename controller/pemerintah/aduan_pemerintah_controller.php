@@ -98,10 +98,6 @@ class AduanPemerintahController
             echo "<td class='py-3 px-4'>" . $aduan['kategori'] . "</td>";
             echo "<td class='py-3 px-4'>" . $aduan['tanggal'] . "</td>";
             echo "<td class='py-3 px-4 flex justify-center items-center'>";
-            // echo "<a href='/pweb/" . $aduan['file_path'] . "' class='text-blue-500 hover:text-blue-700 ml-4'>";
-            // echo "<button class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Lihat</button></a>";
-            // echo "<a href='" . urlpath("pemerintah/proposal/ubahstatus?id=" . $aduan['id_proposal']) . "' class='text-green-500 hover:text-green-700 ml-4'>";
-            // echo "<button class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>Aksi</button></a>";
             echo "</td>";
             echo "</tr>";
         }

@@ -1,4 +1,4 @@
-<div class="container mx-auto mt-10">
+<div class="container mt-10 mx-10 min-h-max min-w-full">
     <div class="flex justify-between items-center mb-8">
         <h1 class="text-2xl font-bold">Daftar Akun Pemerintah</h1>
     </div>

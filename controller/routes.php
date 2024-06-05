@@ -7,12 +7,6 @@ include_once 'function/main.php';
 Router::url('/', 'get', function () { return view('home'); });
 Router::url('login', 'get', 'AuthController::login');
 Router::url('register', 'get', 'AuthController::register');
-// Router::url('dashboard', 'get', 'DashboardController::index');
-Router::url('dashboard/admin', 'get', 'DashboardController::admin');
-Router::url('dashboard/logout', 'get', 'AuthController::logout');
-Router::url('contacts/add', 'get', 'ContactController::add');
-Router::url('contacts/edit', 'get', 'ContactController::edit');
-Router::url('contacts/remove', 'get', 'ContactController::remove');
 Router::url('freshdb', 'get', 'freshdb');
 Router::url('report', 'get', 'ContactController::report');
 
@@ -22,6 +16,9 @@ Router::url('admin/tambahakun', 'get', 'AdminController::TambahAkunPemerintah');
 Router::url('admin/pemerintah', 'get', 'AdminController::ListAkunPemerintah');
 Router::url('admin/pemerintah/edit', 'get', 'AdminController::EditAkunPemerintah');
 Router::url('admin/pemerintah/hapus', 'get', 'AdminController::HapusAkunPemerintah');
+Router::url('admin/artikel', 'get', 'ArtikelController::getAllArtikel');
+Router::url('admin/artikel/add', 'get', 'ArtikelController::addArtikel');
+Router::url('admin/artikel/edit', 'get', 'ArtikelController::editArtikel');
 Router::url('admin/logout', 'get', 'AuthController::logout');
 #Admin POST
 Router::url('tambahakun/tambahakunpemerintah', 'post', 'AdminController::saveTambahAkunPemerintah');
@@ -36,6 +33,9 @@ Router::url('pemerintah/aduan/delete', 'get', 'AduanPemerintahController::delete
 Router::url('pemerintah/logout', 'get', 'AuthController::logout');
 Router::url('pemerintah/aduan/', 'get', 'AduanPemerintahController::cariAduan');
 Router::url('pemerintah/proposal/cari', 'get', 'ProposalPemerintahController::getFilteredProposal');
+Router::url('pemerintah/profil', 'get', 'ProfilPemerintahController::profil');
+Router::url('pemerintah/profil/ubah', 'get', 'ProfilPemerintahController::viewUbahProfil');
+Router::url('pemerintah/profil/edit', 'post', 'ProfilPemerintahController::editProfil');
 
 #Pemerintah POST
 Router::url('pemerintah/proposal/ubahstatus', 'post', 'ProposalPemerintahController::ubahStatusProposal');

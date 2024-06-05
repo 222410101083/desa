@@ -108,7 +108,7 @@ $user = $_SESSION['user'];
             </ul>
         </div>
     </aside>
-    <main class="flex h-full">
+    <main class="flex w-full h-full">
         <?php
         if (isset($url)) {
             include $url . '.php';

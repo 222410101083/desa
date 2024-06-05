@@ -1,14 +1,14 @@
 <?php
 include 'view/master.php'; ?>
-<div class="container mx-auto px-4">
+<div class="w-full mx-auto px-4">
     <h1 class="text-2xl font-bold text-center my-6">Daftar Proposal</h1>
     <div class="mb-4">
         <input type="text" id="searchInput" placeholder="Cari Proposal..." class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
     </div>
-    <div class="">
+    <div class="w-full">
         <table class="min-w-full bg-white shadow-md rounded-lg text-sm">
             <thead class="bg-gray-800 text-white">
-                <tr>
+                <tr class="w-fu">
                     <th class="w-1/6 py-3 px-4 uppercase font-semibold text-left">Nomor</th>
                     <th class="w-1/4 py-3 px-4 uppercase font-semibold text-left">Judul</th>
                     <th class="w-1/3 py-3 px-4 uppercase font-semibold text-left">Deskripsi</th>
@@ -38,7 +38,7 @@ include 'view/master.php'; ?>
                         <td class="py-3 px-4"><?=$proposal['nama_pengaju'] ?></td>
                         <td class="py-3 px-4"><?=$proposal['status'] ?></td>
                         <td class="py-3 px-4 flex justify-center items-center">
-                            <a href="/pweb/<?= $proposal['file_path'] ?>"
+                            <a href="<?= BASEURL . $proposal['file_path'] ?>"
                                 class="text-blue-500 hover:text-blue-700 ml-4"><button
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat</button></a>
                             <a href="<?=urlpath("pemerintah/proposal/ubahstatus?id=" . $proposal['id_proposal']); ?>"

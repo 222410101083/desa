@@ -4,7 +4,7 @@ include 'view/master.php'; ?>
 <div class="min-h-screen flex w-screen mt-4">
     <!-- Container untuk PDF -->
     <div class="w-1/2">
-        <embed class="w-full h-screen" src="/pweb/<?= $proposal['file_path']; ?>" type="application/pdf"></embed>
+        <embed class="w-full h-screen" src="<?= BASEURL . $proposal['file_path']; ?>" type="application/pdf"></embed>
     </div>
 
     <!-- Container untuk judul, deskripsi, dan form ubah status -->

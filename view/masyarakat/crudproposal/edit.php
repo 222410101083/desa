@@ -1,6 +1,6 @@
 <section class="flex w-screen">
     <div class="w-1/3 mb-10">
-        <embed class="w-full h-screen" src="/pweb/<?= $proposal['file_path']; ?>" type="application/pdf"></embed>
+        <embed class="w-full h-screen" src="<?= BASEURL.$proposal['file_path']; ?>" type="application/pdf"></embed>
     </div>
     <div class="bg-gray-100">
         <div class="container mx-auto px-4">

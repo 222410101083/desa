@@ -9,9 +9,7 @@ class ProposalMasyarakatController
             header('Location: ' . BASEURL . 'login?auth=false');
             exit;
         }
-
         // Menampilkan halaman tambah proposal
-
         view('masyarakat/dashboard/layout', ['url' => 'view/masyarakat/crudproposal/add']);
     }
     static function ListProposal()
@@ -158,7 +156,7 @@ class ProposalMasyarakatController
                 $proposal = $currentProposal['file_patch'];
                 Proposal::updateProposal($id_proposal, $judul, $deskripsi, $tanggal_pengajuan, $currentProposal['file_path'], $status);
                 if (isset($_GET['edit']) && $_GET['edit'] == 'success') {
-                    set_flash_message('Data berhasil disimpan.', 'success');
+                    // set_flash_message('Data berhasil disimpan.', 'success');
                 }
                 header('Location: ' . BASEURL . 'masyarakat/proposal?edit=success');
             }
@@ -230,39 +228,6 @@ class ProposalMasyarakatController
             view('masyarakat/dashboard/tambah_proposal');
         }
     }
-    public static function getFilteredProposal()
-    {
-        $searchText = $_GET['query'] ?? '';
-        $proposals = Proposal::getFilteredProposal($searchText);
-        $no = 1;
-        if ($proposals) {
-            $filteredProposals = array_filter($proposals, function ($proposal) {
-                return $proposal['id_user'] == $_SESSION['user']['id'];
-            });
-        }
-        foreach ($proposals as $proposal) {
-            $statusClass = '';
-            if ($proposal['status'] === 'Disetujui') {
-                $statusClass = 'bg-green-100 hover:bg-green-200';
-            } elseif ($proposal['status'] === 'Ditolak') {
-                $statusClass = 'bg-red-100 hover:bg-red-200';
-            } elseif ($proposal['status'] === 'Ditinjau') {
-                $statusClass = 'bg-yellow-100 hover:bg-yellow-200';
-            }
-            echo "<tr class='border-b border-gray-200 $statusClass'>";
-            echo "<td class='py-3 px-4'>" . $no++ . "</td>";
-            echo "<td class='py-3 px-4'>" . $proposal['judul'] . "</td>";
-            echo "<td class='py-3 px-4'>" . $proposal['deskripsi'] . "</td>";
-            echo "<td class='py-3 px-4'>" . $proposal['tanggal_pengajuan'] . "</td>";
-            echo "<td class='py-3 px-4'>" . $proposal['status'] . "</td>";
-            echo "<td class='py-3 px-4 flex justify-center items-center'>";
-            echo "<a href='/pweb/" . $proposal['file_path'] . "' class='text-blue-500 hover:text-blue-700 ml-4'>";
-            echo "<button class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Lihat</button></a>";
-            echo "<a href='" . urlpath("pemerintah/proposal/ubahstatus?id=" . $proposal['id_proposal']) . "' class='text-green-500 hover:text-green-700 ml-4'>";
-            echo "<button class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>Aksi</button></a>";
-            echo "</td>";
-            echo "</tr>";
-        }
-    }
+    
 }
 
