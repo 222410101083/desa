@@ -44,4 +44,37 @@ class Artikel
         $result = $stmt->get_result();
         return $result->fetch_assoc();
     }
+
+    static function getArtikelByPage($limit, $page) {
+        global $conn;
+        $offset = ($page - 1) * $limit;
+        $sql = "SELECT * FROM artikel LIMIT $limit OFFSET $offset";
+        $result = $conn->query($sql);
+        $rows = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+        }
+        $result->free();
+        return $rows;
+    }
+    public static function getTotalArtikel() {
+        global $conn;
+        $sql = "SELECT COUNT(*) as total FROM artikel";
+        $result = $conn->query($sql);
+        if ($result) {
+            $row = $result->fetch_assoc();
+            return $row['total'];
+        } else {
+            return 0;
+        }
+    }
+    static function deleteArtikel($id_artikel)
+    {
+        global $conn;
+        $stmt = $conn->prepare("DELETE FROM artikel WHERE id_artikel = ?");
+        $stmt->bind_param("i", $id_artikel);
+        $stmt->execute();
+    }
 }

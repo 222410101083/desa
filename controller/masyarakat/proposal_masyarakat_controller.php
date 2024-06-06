@@ -59,16 +59,20 @@ class ProposalMasyarakatController
                     if (move_uploaded_file($fileTmpPath, $dest_path)) {
                         // Simpan data proposal ke database
                         Proposal::tambahProposal($judul, $deskripsi, $tanggal_pengajuan, $dest_path, $status, $id_user, $nama_pengaju);
+                        setFlashMessage('Berhasil', 'Berhasil menambahkan proposal');
                         header('Location: ' . BASEURL . '/masyarakat/proposal?upload=success');
                     } else {
+                        setFlashMessage('Gagal', 'Gagal menambahkan proposal');
                         header('Location: ' . BASEURL . '/masyarakat/proposal?upload=error');
                     }
                 } else {
+                    setFlashMessage('Gagal', 'Gagal menambahkan proposal');
                     header('Location: ' . BASEURL . '/masyarakat/proposal?upload=error');
                 }
             }
         } else {
             // Redirect back to the form if the request method is not POST
+            setFlashMessage('Gagal', 'Gagal menambahkan proposal');
             header('Location: ' . BASEURL . '/masyarakat/proposal?upload=error'); // Redirect back to the form if the request method is not POST
 
         }
@@ -143,12 +147,14 @@ class ProposalMasyarakatController
 
                     if (move_uploaded_file($fileTmpPath, $dest_path)) {
                         Proposal::updateProposal($id_proposal, $judul, $deskripsi, $tanggal_pengajuan, $dest_path, $status);
-
+                        setFlashMessage('Berhasil', 'Berhasil mengubah proposal');
                         header('Location: ' . BASEURL . 'masyarakat/proposal?edit=success');
                     } else {
+                        setFlashMessage('Gagal', 'Gagal mengubah proposal');
                         header('Location: ' . BASEURL . 'masyarakat/proposal?edit=error');
                     }
                 } else {
+                    setFlashMessage('Gagal', 'Gagal mengubah proposal');
                     header('Location: ' . BASEURL . 'masyarakat/proposal?edit=invalidtype');
                 }
             } else {
@@ -158,9 +164,11 @@ class ProposalMasyarakatController
                 if (isset($_GET['edit']) && $_GET['edit'] == 'success') {
                     // set_flash_message('Data berhasil disimpan.', 'success');
                 }
+                setFlashMessage('Berhasil', 'Berhasil mengubah proposal');
                 header('Location: ' . BASEURL . 'masyarakat/proposal?edit=success');
             }
         } else {
+            setFlashMessage('Gagal', 'Gagal mengubah proposal');
             header('Location: ' . BASEURL . 'masyarakat/proposal?edit=error');
         }
     }
@@ -175,11 +183,13 @@ class ProposalMasyarakatController
 
             // Cek jika proposal sudah disetujui
             if ($proposal['status'] === 'Disetujui') {
+                setFlashMessage('Gagal', 'Gagal menghapus proposal');
                 header('Location: ' . BASEURL . 'masyarakat/proposal?delete=denied');
                 exit;
             }
 
             Proposal::destroyProposal($id_proposal);
+            setFlashMessage('Berhasil', 'Berhasil menghapus proposal');
             header('Location: ' . BASEURL . 'masyarakat/proposal?delete=success');
         }
     }

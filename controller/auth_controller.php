@@ -47,6 +47,7 @@ class AuthController {
         // Periksa apakah email sudah terdaftar
         $existingUser = User::getUserByEmail($post['email']);
         if ($existingUser) {
+            setFlashMessage('Maaf', 'Email sudah terdaftar');
             header('Location: '.BASEURL.'register?error=user_exists');
             exit; // Berhenti eksekusi lebih lanjut
         }
@@ -60,9 +61,12 @@ class AuthController {
         ]);
 
         if ($user) {
+            $_SESSION['success'] = 'Berhasil mendaftar, silakan login';
             header('Location: '.BASEURL.'login');
+
         }
         else {
+            $_SESSION['error'] = 'Gagal mendaftar, silakan coba lagi';
             header('Location: '.BASEURL.'register?failed=true');
         }
     }

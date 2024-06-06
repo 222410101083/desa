@@ -3,20 +3,33 @@ include_once 'model/user_model.php';
 
 class AdminController
 {
-    public static function Dashboard()
+    static function Dashboard()
     {
-        // Cek apakah pengguna telah login dan memiliki peran admin
         if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
             header('Location: ' . BASEURL . 'login?auth=false');
             exit;
         }
-
-        // Tampilkan dashboard admin
-        // view('auth_page/layout', ['url' => 'login']);
-        view('admin/dashboard/layout', [
-            'url' => 'home',
-        ]);
+        $limit = 6;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        $artikel = Artikel::getArtikelByPage($limit, $page);
+        $totalArtikel = Artikel::getTotalArtikel();
+        $totalPages = ceil($totalArtikel / $limit);
+        view('admin/dashboard/layout', ['url' => 'home', 'artikel' => $artikel, 'totalPages' => $totalPages, 'currentPage' => $page]);
     }
+    // public static function Dashboard()
+    // {
+    //     // Cek apakah pengguna telah login dan memiliki peran admin
+    //     if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+    //         header('Location: ' . BASEURL . 'login?auth=false');
+    //         exit;
+    //     }
+
+    //     // Tampilkan dashboard admin
+    //     // view('auth_page/layout', ['url' => 'login']);
+    //     view('admin/dashboard/layout', [
+    //         'url' => 'home',
+    //     ]);
+    // }
     static function profil()
     {
         if (!isset($_SESSION['user'])) {

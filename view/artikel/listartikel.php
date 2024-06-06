@@ -1,8 +1,6 @@
 <?php include 'view/master.php'; ?>
-<?php $title = 'Desa Jatimulyo'; ?>
 
-<?php ob_start(); ?>
-<!-- component -->
+<?php $title = 'Desa Jatimulyo'; ?>
 <nav id="header" class="w-full py-1 bg-white shadow-lg border-b border-blue-400">
     <div class="w-full flex items-center justify-between mt-0 px-6 py-2">
         <label for="menu-toggle" class="cursor-pointer md:hidden block">
@@ -30,8 +28,7 @@
 <div class="flex flex-col justify-center overflow-hidden bg-gray-50 py-2">
     <div class="m-2 flex flex-wrap justify-start items-start mx-auto max-w-screen-lg">
         <div class="header flex w-full justify-center">
-            <h2
-                class="font-black pb-1 mb-10 text-5xl text-blue-900 relative">
+            <h2 class="font-black pb-1 mb-10 text-5xl text-blue-900 relative">
                 Berita Desa</h2>
         </div>
         <div class="flex flex-wrap justify-between w-full">

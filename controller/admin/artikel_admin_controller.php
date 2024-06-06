@@ -58,5 +58,22 @@ class ArtikelAdminController
             view('component/detailartikel', ['url' => 'view/component/detailartikel', 'artikel' => $artikel]);
         }
     }
+    static function showEditArtikel()
+    {
+        if (isset($_GET['id'])) {
+            $id_artikel = $_GET['id'];
+            $artikel = Artikel::getArtikelById($id_artikel);
+            view('admin/dashboard/layout', ['url' => 'view/admin/crudartikel/edit', 'artikel' => $artikel]);
+        }
+    }
+    static function deleteArtikel()
+    {
+        if (isset($_GET['id'])) {
+            $id_artikel = $_GET['id'];
+            Artikel::deleteArtikel($id_artikel);
+            setFlashMessage('Berhasil', 'Berhasil menghapus artikel!');
+            view('admin/dashboard/layout', ['url' => 'artikel']);
+        }
+    }
 }
 

@@ -19,6 +19,7 @@ Router::url('admin/artikel', 'get', 'ArtikelAdminController::getAllArtikel');
 Router::url('admin/artikel/add', 'get', 'ArtikelAdminController::showAddArtikel');
 Router::url('admin/artikel/edit', 'get', 'ArtikelAdminController::editArtikel');
 Router::url('admin/artikel/detail', 'get', 'ArtikelAdminController::showDetailArtikel');
+Router::url('admin/artikel/delete', 'get', 'ArtikelAdminController::deleteArtikel');
 Router::url('admin/profil', 'get', 'AdminController::profil');
 Router::url('admin/logout', 'get', 'AuthController::logout');
 #Admin POST

@@ -44,6 +44,7 @@ class profilMasyarakatController
             $currentUserId = $_GET['id']; // atau cara lain untuk mendapatkan ID user saat ini
 
             if (User::checkEmailExists($email, $currentUserId)) {
+                setFlashMessage('Gagal', 'Email sudah terdaftar');
                 header('Location: ' . BASEURL . 'masyarakat/profil?edit=emailused');
                 exit;
             }
@@ -85,6 +86,7 @@ class profilMasyarakatController
                         $_SESSION['user']['email'] = $email;
                         $_SESSION['user']['nomor_hp'] = $nomor_hp;
                         error_log("Failed to move file to $dest_path");
+                        setFlashMessage('Gagal', 'Gagal mengubah profil');
                         header('Location: ' . BASEURL . 'masyarakat/profil?edit=error');
                     }
                 } else {
@@ -94,6 +96,7 @@ class profilMasyarakatController
                     $_SESSION['user']['name'] = $nama;
                     $_SESSION['user']['email'] = $email;
                     $_SESSION['user']['nomor_hp'] = $nomor_hp;
+                    setFlashMessage('Gagal', 'Gagal mengubah profil');
                     header('Location: ' . BASEURL . 'masyarakat/profil?edit=invalidtype');
                 }
             } else {
@@ -105,9 +108,11 @@ class profilMasyarakatController
                 $_SESSION['user']['nomor_hp'] = $nomor_hp;
                 // Update profil tanpa mengubah avatar
                 User::updateProfil($id_user, $nama, $email, $nomor_hp, $_SESSION['user']['avatar']);
+                setFlashMessage('Berhasil', 'Berhasil mengubah profil');
                 header('Location: ' . BASEURL . 'masyarakat/profil?edit=success');
             }
         } else {
+            setFlashMessage('Gagal', 'Gagal mengubah profil');
             header('Location: ' . BASEURL . 'masyarakat/profil?edit=error');
         }
     }

@@ -35,7 +35,7 @@ class AduanMasyakatController
 
             // Membersihkan data dari input untuk mencegah XSS
             $post = array_map('htmlspecialchars', $_POST);
-            $contact = Aduan::insert([
+            $aduan = Aduan::insert([
                 'id_pengadu' => $_SESSION['user']['id'],
                 'judul' => $post['judul'],
                 'deskripsi' => $post['deskripsi'],
@@ -48,9 +48,11 @@ class AduanMasyakatController
             // Menyiapkan data untuk disimpan ke database
 
             // Memanggil model untuk menyimpan data
-            if ($contact) {
+            if ($aduan) {
+                setFlashMessage('Berhasil', 'Berhasil menambahkan aduan');
                 header('Location: ' . BASEURL . 'masyarakat/aduan?status=success');
             } else {
+                setFlashMessage('Gagal', 'Gagal menambahkan aduan');
                 header('Location: ' . BASEURL . 'masyarakat/aduan?status=error');
             }
         }
@@ -74,8 +76,10 @@ class AduanMasyakatController
             ];
 
             if (Aduan::update($data)) {
+                setFlashMessage('Berhasil', 'Berhasil mengubah aduan');
                 header('Location: ' . BASEURL . 'aduan/index?status=updated');
             } else {
+                setFlashMessage('Gagal', 'Gagal mengubah aduan');
                 header('Location: ' . BASEURL . 'aduan/edit/' . $id . '?status=error');
             }
         }
@@ -84,8 +88,10 @@ class AduanMasyakatController
     public function destroy($id) //Menghapus aduan dari database.
     {
         if (Aduan::delete($id)) {
+            setFlashMessage('Berhasil', 'Berhasil menghapus aduan');
             header('Location: ' . BASEURL . 'aduan/index?status=deleted');
         } else {
+            setFlashMessage('Gagal', 'Gagal menghapus aduan');
             header('Location: ' . BASEURL . 'aduan/index?status=error');
         }
     }
