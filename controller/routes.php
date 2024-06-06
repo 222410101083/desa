@@ -7,8 +7,7 @@ include_once 'function/main.php';
 Router::url('/', 'get', function () { return view('home'); });
 Router::url('login', 'get', 'AuthController::login');
 Router::url('register', 'get', 'AuthController::register');
-Router::url('freshdb', 'get', 'freshdb');
-Router::url('report', 'get', 'ContactController::report');
+Router::url('artikel', 'get', 'ArtikelController::showListArtikel');
 
 #Admin
 Router::url('admin/dashboard', 'get', 'AdminController::dashboard');
@@ -16,12 +15,15 @@ Router::url('admin/tambahakun', 'get', 'AdminController::TambahAkunPemerintah');
 Router::url('admin/pemerintah', 'get', 'AdminController::ListAkunPemerintah');
 Router::url('admin/pemerintah/edit', 'get', 'AdminController::EditAkunPemerintah');
 Router::url('admin/pemerintah/hapus', 'get', 'AdminController::HapusAkunPemerintah');
-Router::url('admin/artikel', 'get', 'ArtikelController::getAllArtikel');
-Router::url('admin/artikel/add', 'get', 'ArtikelController::addArtikel');
-Router::url('admin/artikel/edit', 'get', 'ArtikelController::editArtikel');
+Router::url('admin/artikel', 'get', 'ArtikelAdminController::getAllArtikel');
+Router::url('admin/artikel/add', 'get', 'ArtikelAdminController::showAddArtikel');
+Router::url('admin/artikel/edit', 'get', 'ArtikelAdminController::editArtikel');
+Router::url('admin/artikel/detail', 'get', 'ArtikelAdminController::showDetailArtikel');
+Router::url('admin/profil', 'get', 'AdminController::profil');
 Router::url('admin/logout', 'get', 'AuthController::logout');
 #Admin POST
 Router::url('tambahakun/tambahakunpemerintah', 'post', 'AdminController::saveTambahAkunPemerintah');
+Router::url('admin/artikel/add', 'post', 'ArtikelAdminController::storeArtikel');
 
 #Pemerintah
 Router::url('pemerintah/dashboard', 'get', 'DashboardPemerintahController::index');
@@ -36,6 +38,7 @@ Router::url('pemerintah/proposal/cari', 'get', 'ProposalPemerintahController::ge
 Router::url('pemerintah/profil', 'get', 'ProfilPemerintahController::profil');
 Router::url('pemerintah/profil/ubah', 'get', 'ProfilPemerintahController::viewUbahProfil');
 Router::url('pemerintah/profil/edit', 'post', 'ProfilPemerintahController::editProfil');
+Router::url('pemerintah/proposal/detail', 'get', 'ProposalPemerintahController::showDetailProposal');
 
 #Pemerintah POST
 Router::url('pemerintah/proposal/ubahstatus', 'post', 'ProposalPemerintahController::ubahStatusProposal');
@@ -46,11 +49,12 @@ Router::url('masyarakat/proposal', 'get', 'ProposalMasyarakatController::ListPro
 Router::url('masyarakat/proposal/add', 'get', 'ProposalMasyarakatController::addProposal');
 Router::url('masyarakat/proposal/edit', 'get', 'ProposalMasyarakatController::showEditProposal');
 Router::url('masyarakat/proposal/cari', 'get', 'ProposalMasyarakatController::getFilteredProposal');
+Router::url('masyarakat/proposal/detail', 'get', 'ProposalMasyarakatController::showDetailProposal');
 Router::url('proposal/view', 'get', 'ProposalMasyarakatController::viewProposalPDF');
-Router::url('masyarakat/aduan', 'get', 'AduanController::indexByUser');
-Router::url('masyarakat/aduan/add', 'get', 'AduanController::create');
-Router::url('masyarakat/aduan/cari', 'get', 'AduanController::cariAduan');
-Router::url('masyarakat/aduan/destroy', 'get', 'AduanController::delete');
+Router::url('masyarakat/aduan', 'get', 'AduanMasyakatController::indexByUser');
+Router::url('masyarakat/aduan/add', 'get', 'AduanMasyakatController::create');
+Router::url('masyarakat/aduan/cari', 'get', 'AduanMasyakatController::cariAduan');
+Router::url('masyarakat/aduan/destroy', 'get', 'AduanMasyakatController::delete');
 Router::url('masyarakat/profil', 'get', 'ProfilMasyarakatController::profil');
 Router::url ('masyarakat/profil/ubah', 'get', 'profilMasyarakatController::viewUbahProfil');
 Router::url('masyarakat/profil/edit', 'post', 'ProfilMasyarakatController::editProfil');
@@ -63,7 +67,7 @@ Router::url('masyarakat/proposal/add', 'post', 'ProposalMasyarakatController::st
 Router::url('masyarakat/proposal/edit', 'post', 'ProposalMasyarakatController::editProposal');
 Router::url('masyarakat/proposal/delete', 'get', 'ProposalMasyarakatController::removeProposal');
 
-Router::url('masyarakat/aduan/add', 'post', 'AduanController::store');
+Router::url('masyarakat/aduan/add', 'post', 'AduanMasyakatController::store');
 
 
 #Proposal

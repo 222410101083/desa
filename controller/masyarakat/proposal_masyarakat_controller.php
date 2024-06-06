@@ -37,7 +37,7 @@ class ProposalMasyarakatController
             $judul = $_POST['judul'];
             $deskripsi = $_POST['deskripsi'];
             $tanggal_pengajuan = date('Y-m-d H:i:s'); // Mengambil tanggal dan waktu saat ini
-            $status = 'Diajukan';
+            $status = 'ditinjau';
             $id_user = $_SESSION['user']['id'];
             $nama_pengaju = $_SESSION['user']['name'];
 
@@ -122,7 +122,7 @@ class ProposalMasyarakatController
             $judul = $_POST['judul'];
             $deskripsi = $_POST['deskripsi'];
             $tanggal_pengajuan = date('Y-m-d H:i:s');
-            $status = 'Diajukan';
+            $status = 'ditinjau';
             $proposal = $_FILES['file_patch'];
             // $nama_pengaju = $_SESSION['user']['name'];
 
@@ -194,7 +194,7 @@ class ProposalMasyarakatController
             $judul = $_POST['judul'];
             $deskripsi = $_POST['deskripsi'];
             $tanggal_pengajuan = date('Y-m-d H:i:s'); // Mengambil tanggal dan waktu saat ini
-            $status = 'Diajukan';
+            $status = 'ditinjau';
             $id_user = $_SESSION['user']['id'];
             $nama_pengaju = $_SESSION['user']['name'];
 
@@ -228,6 +228,48 @@ class ProposalMasyarakatController
             view('masyarakat/dashboard/tambah_proposal');
         }
     }
-    
+    static function showDetailProposal()
+    {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        }
+        if (isset($_GET['id'])) {
+            $id_proposal = $_GET['id'];
+            $proposal = Proposal::getProposalById($id_proposal);
+            view('masyarakat/dashboard/layout', ['url' => 'view/masyarakat/crudproposal/detailproposal', 'proposal' => $proposal]);
+        }
+    }
+    public static function getFilteredProposal()
+    {
+        $searchText = $_GET['query'] ?? '';
+        $proposals = Proposal::getUserFilteredProposal($searchText, $_SESSION['user']['id']);
+        $no = 1;
+        foreach ($proposals as $proposal) {
+            $statusClass = '';
+            if ($proposal['status'] === 'Disetujui') {
+                $statusClass = 'bg-green-100 hover:bg-green-200';
+            } elseif ($proposal['status'] === 'Ditolak') {
+                $statusClass = 'bg-red-100 hover:bg-red-200';
+            } elseif ($proposal['status'] === 'Ditinjau') {
+                $statusClass = 'bg-yellow-100 hover:bg-yellow-200';
+            }
+            echo "<tr class='border-b border-gray-200 $statusClass'>";
+            echo "<td class='py-3 px-4'>" . $no++ . "</td>";
+            echo "<td class='py-3 px-4'>" . $proposal['judul'] . "</td>";
+            echo "<td class='py-3 px-4'>" . $proposal['tanggal_pengajuan'] . "</td>";
+            echo "<td class='py-3 px-4'>" . $proposal['status'] . "</td>";
+            echo "<td class='py-3 px-4 flex justify-center items-center'>";
+            echo "<a href=" . BASEURL . "masyarakat/proposal/detail?id=" . $proposal['id_proposal'] . "
+            class='ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Lihat</a>";
+            echo "<a href=" . BASEURL . "masyarakat/proposal/edit?id=" . $proposal['id_proposal'] . "
+            class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4'>Edit</a>";
+            echo "<a href=" . BASEURL . "masyarakat/proposal/delete?id=" . $proposal['id_proposal'] . "
+            class='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded hover:text-white-700 ml-4'>Hapus</a>";
+            echo "</td>";
+            echo "</tr>";
+        }
+    }
+
 }
 

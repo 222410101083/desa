@@ -70,6 +70,19 @@ class Proposal
         }
         return $rows;
     }
+    public static function getPendingProposals()
+    {
+        global $conn;
+        $query = "SELECT * FROM proposal WHERE status = 'ditinjau'";
+        $result = $conn->query($query);
+        $rows = [];
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+        }
+        return $rows;
+    }
 
     public static function getProposalById($id)
     {
@@ -91,6 +104,81 @@ class Proposal
     {
         global $conn;
         $sql = "SELECT * FROM proposal WHERE id_user = ?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            throw new Exception("MySQL prepare error: " . $conn->error);
+        }
+
+        $stmt->bind_param('s', $user_id);
+        $stmt->execute();
+        if ($stmt->error) {
+            throw new Exception("Execute error: " . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        if ($result->num_rows === 0) {
+            return null;
+        }
+
+        $proposals = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        return $proposals;
+    }
+
+    public static function getProposalsDeclinedByUserId($user_id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM proposal WHERE id_user = ? AND status = 'ditolak'";
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            throw new Exception("MySQL prepare error: " . $conn->error);
+        }
+
+        $stmt->bind_param('s', $user_id);
+        $stmt->execute();
+        if ($stmt->error) {
+            throw new Exception("Execute error: " . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        if ($result->num_rows === 0) {
+            return null;
+        }
+
+        $proposals = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        return $proposals;
+    }
+
+    public static function getProposalsPendingByUserId($user_id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM proposal WHERE id_user = ? AND status = 'ditinjau'";
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            throw new Exception("MySQL prepare error: " . $conn->error);
+        }
+
+        $stmt->bind_param('s', $user_id);
+        $stmt->execute();
+        if ($stmt->error) {
+            throw new Exception("Execute error: " . $stmt->error);
+        }
+
+        $result = $stmt->get_result();
+        if ($result->num_rows === 0) {
+            return null;
+        }
+
+        $proposals = $result->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        return $proposals;
+    }
+
+    public static function getProposalsApprovedByUserId($user_id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM proposal WHERE id_user = ? AND status = 'disetujui'";
         $stmt = $conn->prepare($sql);
         if ($stmt === false) {
             throw new Exception("MySQL prepare error: " . $conn->error);
@@ -190,6 +278,16 @@ class Proposal
         $stmt = $conn->prepare($sql);
         $searchText = "%$searchText%";
         $stmt->bind_param("sssss", $searchText, $searchText, $searchText, $searchText, $searchText);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+    public static function getUserFilteredProposal($searchText, $user_id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM proposal WHERE id_user = ? AND (status LIKE ? OR judul LIKE ? OR tanggal_pengajuan LIKE ?)";
+        $stmt = $conn->prepare($sql);
+        $searchText = "%$searchText%";
+        $stmt->bind_param("ssss", $user_id, $searchText, $searchText, $searchText);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }

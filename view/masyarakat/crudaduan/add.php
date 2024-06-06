@@ -1,5 +1,7 @@
-<div class="bg-gray-100 h-screen w-screen">
-    <div class="w-full max-w-lg">
+<div class="bg-gray-100 h-screen w-full">
+    <div class="mx-auto px-10 flex flex-col items-center justify-center">
+        <h1 class="text-2xl font-bold text-gray-900 my-4">Tambah Aduan</h1>
+        <div class="w-full max-w-lg">
             <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST" action="<?= urlpath('masyarakat/aduan/add'); ?>">
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="judul">

@@ -12,8 +12,8 @@ class profilMasyarakatController
             // Arahkan ke dashboard berdasarkan role
             if ($_SESSION['user']['role'] == 'admin') {
                 header('Location: ' . BASEURL . 'admin/dashboard');
-            } elseif ($_SESSION['user']['role'] == 'pegawai') {
-                header('Location: ' . BASEURL . 'pegawai/dashboard');
+            } elseif ($_SESSION['user']['role'] == 'pemerintah') {
+                header('Location: ' . BASEURL . 'pemerintah/dashboard');
             } else {
                 header('Location: ' . BASEURL . 'login?auth=false');
             }
@@ -111,4 +111,5 @@ class profilMasyarakatController
             header('Location: ' . BASEURL . 'masyarakat/profil?edit=error');
         }
     }
+
 }

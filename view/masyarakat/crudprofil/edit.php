@@ -1,7 +1,7 @@
-<div class="bg-white overflow-hidden shadow rounded-lg border">
+<div class="bg-white overflow-hidden shadow rounded-lg border mt-10 mx-10">
     <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
-            Ubah Profil Masyarakat
+            Ubah Profil Akun
         </h3>
     </div>
     <form action="<?= BASEURL . 'masyarakat/profil/edit?id=' . $user['id']; ?>" method="POST"

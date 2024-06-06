@@ -4,14 +4,23 @@ include_once 'model/proposal_model.php';
 
 class DashboardMasyarakatController
 {
-    static function index()
-    {
+    static function index() {
         if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
-            header('Location: ' . BASEURL . 'login?auth=false');
+            header('Location: '.BASEURL.'login?auth=false');
             exit;
-        } else {
+        }   
+        else {
+            $userId = $_SESSION['user']['id'];
+            $userProposals = Proposal::getProposalsByUserId($userId);
+            $userDeclinedProposals = Proposal::getProposalsDeclinedByUserId($userId);
+            $userPendingProposals = Proposal::getProposalsPendingByUserId($userId);
+            $userApprovedProposals = Proposal::getProposalsApprovedByUserId($userId);
             view('masyarakat/dashboard/layout', [
                 'url' => 'home',
+                'userProposals' => $userProposals,
+                'userDeclinedProposals' => $userDeclinedProposals,
+                'userPendingProposals' => $userPendingProposals,
+                'userApprovedProposals' => $userApprovedProposals,
             ]);
         }
     }

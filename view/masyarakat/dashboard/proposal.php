@@ -1,8 +1,5 @@
 <?php
 include 'view/master.php';
-// session_start();
-// ob_start();
-// $style = ob_get_clean();
 ?>
 <div class="container mx-auto px-4">
     <h1 class="text-2xl font-bold text-left my-6">Daftar Proposal</h1>
@@ -21,7 +18,7 @@ include 'view/master.php';
                 <tr>
                     <th class="w-1/6 py-3 px-4 uppercase font-semibold text-left">Nomor</th>
                     <th class="w-1/4 py-3 px-4 uppercase font-semibold text-left">Judul</th>
-                    <th class="w-1/3 py-3 px-4 uppercase font-semibold text-left">Deskripsi</th>
+                    <!-- <th class="w-1/3 py-3 px-4 uppercase font-semibold text-left">Deskripsi</th> -->
                     <th class="w-1/6 py-3 px-4 uppercase font-semibold text-left">Tanggal Pengajuan</th>
                     <th class="w-1/6 py-3 px-4 uppercase font-semibold text-left">Status</th>
                     <th class="w-1/6 py-3 px-4 uppercase font-semibold text-center">Aksi</th>
@@ -39,16 +36,22 @@ include 'view/master.php';
                 }
 
                 foreach ($filteredProposals as $proposal):
-                    $rowClass = ($proposal['status'] == 'Disetujui') ? 'bg-green-200 hover:bg-green-100' : '';
+                    $statusClass = '';
+                    if ($proposal['status'] === 'Disetujui') {
+                        $statusClass = 'bg-green-100 hover:bg-green-200';
+                    } elseif ($proposal['status'] === 'Ditolak') {
+                        $statusClass = 'bg-red-100 hover:bg-red-200';
+                    } elseif ($proposal['status'] === 'Ditinjau') {
+                        $statusClass = 'bg-yellow-100 hover:bg-yellow-200';
+                    }
                     ?>
-                    <tr class="border-b border-gray-200 hover:bg-gray-100 <?= $rowClass ?>">
+                    <tr class="border-b border-gray-200 hover:bg-gray-100 <?= $statusClass ?>">
                         <td class="py-3 px-4"><?= $no++; ?></td>
                         <td class="py-3 px-4"><?= htmlspecialchars($proposal['judul']) ?></td>
-                        <td class="py-3 px-4"><?= htmlspecialchars($proposal['deskripsi']) ?></td>
                         <td class="py-3 px-4"><?= htmlspecialchars($proposal['tanggal_pengajuan']) ?></td>
                         <td class="py-3 px-4"><?= htmlspecialchars($proposal['status']) ?></td>
                         <td class="py-3 px-4 flex justify-center items-center">
-                            <a href="<?= BASEURL . $proposal['file_path'] ?>" target="_blank"
+                            <a href="<?= BASEURL . "masyarakat/proposal/detail?id=" . $proposal['id_proposal'] ?>"
                                 class="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat</a>
                             <a href="<?= BASEURL . "masyarakat/proposal/edit?id=" . $proposal['id_proposal'] ?>"
                                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4">Edit</a>
@@ -63,3 +66,17 @@ include 'view/master.php';
         </table>
     </div>
 </div>
+<script>
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+        var searchText = this.value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '<?= urlpath("masyarakat/proposal/cari") ?>?query=' + searchText, true);
+        console.log(xhr);
+        xhr.onload = function () {
+            if (this.status === 200) {
+                document.querySelector('tbody').innerHTML = this.responseText;
+            }
+        }
+        xhr.send();
+    });
+</script>

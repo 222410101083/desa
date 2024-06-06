@@ -2,7 +2,7 @@
 $user = $_SESSION['user'];
 // var_dump($user);
 ?>
-<div class="bg-white overflow-hidden shadow rounded-lg border">
+<div class="bg-white overflow-hidden shadow rounded-lg border mt-10 mx-10">
     <div class="px-4 py-5 sm:px-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
             Profil Pemerintah

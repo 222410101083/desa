@@ -38,7 +38,7 @@ include 'view/master.php'; ?>
                         <td class="py-3 px-4"><?=$proposal['nama_pengaju'] ?></td>
                         <td class="py-3 px-4"><?=$proposal['status'] ?></td>
                         <td class="py-3 px-4 flex justify-center items-center">
-                            <a href="<?= BASEURL . $proposal['file_path'] ?>"
+                            <a href="<?=urlpath("pemerintah/proposal/detail?id=" . $proposal['id_proposal']); ?>"
                                 class="text-blue-500 hover:text-blue-700 ml-4"><button
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat</button></a>
                             <a href="<?=urlpath("pemerintah/proposal/ubahstatus?id=" . $proposal['id_proposal']); ?>"

@@ -2,12 +2,20 @@
 $title = 'Dashboard';
 $user = $_SESSION['user'];
 ?>
-
 <?php
 ob_start();
 include 'style.css';
 $style = ob_get_clean();
 ?>
+<style>
+    .alert {
+        padding: 10px;
+        background-color: #f44336;
+        /* Red */
+        color: white;
+        margin-bottom: 15px;
+    }
+</style>
 <div class="flex flex-warp w-full justify-beetwen">
     <aside
         class=" h-screen top-0 left-0 pt-16 lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75 bg-gradient-to-br from-[#4F46E5] to-[#4F46E5] -translate-x-80 inset-0 rounded-xl transition-transform xl:translate-x-0">
@@ -46,7 +54,7 @@ $style = ob_get_clean();
                             </svg>
                             <p
                                 class="block antialiased font-sans text-base leading-relaxed text-inherit font-medium capitalize">
-                                Lihat Akun Pemerintah
+                                Akun Pemerintah
                             </p>
                         </button>
                     </a>
@@ -69,7 +77,7 @@ $style = ob_get_clean();
                     </a>
                 </li>
                 <li>
-                    <a class="" href="#">
+                    <a class="" href="profil">
                         <button
                             class="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                             type="button">

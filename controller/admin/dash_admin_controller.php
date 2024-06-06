@@ -17,6 +17,25 @@ class AdminController
             'url' => 'home',
         ]);
     }
+    static function profil()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        } elseif ($_SESSION['user']['role'] !== 'admin') {
+            // Arahkan ke dashboard berdasarkan role
+            if ($_SESSION['user']['role'] == 'admin') {
+                header('Location: ' . BASEURL . 'admin/dashboard');
+            } elseif ($_SESSION['user']['role'] == 'pemerintah') {
+                header('Location: ' . BASEURL . 'pemerintah/dashboard');
+            } else {
+                header('Location: ' . BASEURL . 'login?auth=false');
+            }
+            exit;
+        } else {
+            view('admin/dashboard/layout', ['url' => 'profil', 'user' => $_SESSION['user']]);
+        }
+    }
     static function TambahAkunPemerintah()
     {
         if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
@@ -36,20 +55,24 @@ class AdminController
             header('Location: ' . BASEURL . 'login?auth=false');
             exit;
         }
-        $post = array_map('htmlspecialchars', $_POST);
 
-        $user = User::register([
+        $post = array_map('htmlspecialchars', $_POST);
+        $response = User::register([
             'name' => $post['name'],
             'email' => $post['email'],
             'password' => $post['password'],
             'role' => $post['role']
-            
         ]);
 
-        if ($user) {
+        if ($response === true) {
+            setFlashMessage('success', 'Akun pemerintah berhasil dibuat');
             header('Location: ' . BASEURL . 'admin/pemerintah?tambahakun=true');
+        } else if ($response === 'Email sudah terdaftar') {
+            setFlashMessage('error', 'Email sudah terdaftar');
+            header('Location: ' . BASEURL . 'admin/tambahakun?tambahakun=false&error=email');
         } else {
-            header('Location: ' . BASEURL . 'admin/pemerintah?tambahakun=false');
+            setFlashMessage('error', 'Akun pemerintah gagal dibuat');
+            header('Location: ' . BASEURL . 'admin/tambahakun?tambahakun=false');
         }
     }
     public static function ListAkunPemerintah()
@@ -70,19 +93,18 @@ class AdminController
             'user' => $_SESSION['user']['role'] !== 'admin'
         ]);
     }
-    static function remove() {
+    static function remove()
+    {
         if (!isset($_SESSION['user'])) {
-            header('Location: '.BASEURL.'login?auth=false');
+            header('Location: ' . BASEURL . 'login?auth=false');
             exit;
-        }
-        else {
+        } else {
             $id = $_GET['id'];
             $user = User::deleteUser($id);
             if ($user) {
-                header('Location: '.BASEURL.'admin/pemerintah');
-            }
-            else {
-                header('Location: '.BASEURL.'admin/pemerintah?removeFailed=true');
+                header('Location: ' . BASEURL . 'admin/pemerintah');
+            } else {
+                header('Location: ' . BASEURL . 'admin/pemerintah?removeFailed=true');
             }
         }
     }

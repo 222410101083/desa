@@ -2,7 +2,7 @@
 
 include_once 'model/aduan_model.php';
 
-class AduanController
+class AduanMasyakatController
 {
     public static function indexByUser() // Menampilkan aduan yang ditulis oleh pengguna yang login.
     {
@@ -87,6 +87,24 @@ class AduanController
             header('Location: ' . BASEURL . 'aduan/index?status=deleted');
         } else {
             header('Location: ' . BASEURL . 'aduan/index?status=error');
+        }
+    }
+
+    public static function cariAduan()
+    {
+        $searchText = $_GET['query'] ?? '';
+        $aduans = Aduan::getUserFilteredAduan($searchText, $_SESSION['user']['id']);
+        $no = 1;
+        foreach ($aduans as $aduan) {
+            echo "<tr class='border-b border-gray-200'>";
+            echo "<td class='py-3 px-4'>" . $no++ . "</td>";
+            echo "<td class='py-3 px-4'>" . $aduan['judul'] . "</td>";
+            echo "<td class='py-3 px-4'>" . $aduan['deskripsi'] . "</td>";
+            echo "<td class='py-3 px-4'>" . $aduan['kategori'] . "</td>";
+            echo "<td class='py-3 px-4'>" . $aduan['tanggal'] . "</td>";
+            echo "<td class='py-3 px-4 flex justify-center items-center'>";
+            echo "</td>";
+            echo "</tr>";
         }
     }
     

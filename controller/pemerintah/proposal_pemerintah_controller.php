@@ -167,15 +167,6 @@ class ProposalPemerintahController
             header('Location: ' . BASEURL . 'pemerintah/proposal?status=error');
         }
     }
-    // public static function getFilteredProposals()
-    // {
-    //     // die(); 
-    //     $searchText = $_GET['query'] ?? '';
-    //     $proposals = Proposal::getFilteredProposal($searchText);
-    //     foreach ($proposals as $proposal) {
-    //     }
-    // }
-
     public static function getFilteredProposal()
     {
         $searchText = $_GET['query'] ?? '';
@@ -204,6 +195,18 @@ class ProposalPemerintahController
             echo "<button class='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>Aksi</button></a>";
             echo "</td>";
             echo "</tr>";
+        }
+    }
+    static function showDetailProposal()
+    {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'pemerintah') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        }
+        if (isset($_GET['id'])) {
+            $id_proposal = $_GET['id'];
+            $proposal = Proposal::getProposalById($id_proposal);
+            view('pemerintah/dashboard/layout', ['url' => 'view/pemerintah/crudproposal/detailproposal', 'proposal' => $proposal]);
         }
     }
 }

@@ -36,12 +36,10 @@ class Router {
             }
         }
 
-        if (!in_array($url, self::$urls['routes'])) {
-            if (isset($_SESSION['user'])) {
-                header('Location: '.BASEURL.$dashboard);
-            } else {
-                header('Location: '.BASEURL);
-            }
+        // Cek jika URL tidak ada dalam daftar rute
+        if (!array_key_exists($url, self::$urls[$_SERVER['REQUEST_METHOD']])) {
+            header("HTTP/1.0 404 Not Found");
+            include 'view/component/404.php';
             exit;
         }
 
@@ -75,36 +73,19 @@ function urlpath($path) {
     return BASEURL.$path;
 }
 
-function setFlashMessage( $type, $message )
- {
-    if ( !isset( $_SESSION[ 'user' ] ) ) {
-        $_SESSION[ 'guest_' . $type ] = $message;
-    } else {
-        $_SESSION[ $type . '_' . $_SESSION[ 'user' ][ 'id' ] ] = $message;
-    }
+function setFlashMessage($type, $message) {
+    if (!session_id()) session_start();
+    $_SESSION['flash_message'] = [
+        'type' => $type,
+        'message' => $message
+    ];
 }
 
-function displayFlashMessages( $type )
- {
-    if ( !isset( $_SESSION[ 'user' ] ) ) {
-        $messageKey = 'guest_' . $type;
-        if ( isset( $_SESSION[ $messageKey ] ) ) {
-            echo '<div class="alert alert-' . $type . ' alert-dismissible fade show absolute" role="alert">';
-            echo $_SESSION[ $messageKey ];
-            echo '<button type="button" class="btn-close custom-close-button" data-bs-dismiss="alert" aria-label="Close">';
-            echo '</button>';
-            echo '</div>';
-            unset( $_SESSION[ $messageKey ] );
-        }
-    } else {
-        $messageKey = $type . '_' . $_SESSION[ 'user' ][ 'id' ];
-        if ( isset( $_SESSION[ $messageKey ] ) ) {
-            echo '<div class="alert alert-' . $type . ' alert-dismissible fade show absolute" role="alert">';
-            echo $_SESSION[ $messageKey ];
-            echo '<button type="button" class="btn-close custom-close-button" data-bs-dismiss="alert" aria-label="Close">';
-            echo '</button>';
-            echo '</div>';
-            unset( $_SESSION[ $messageKey ] );
-        }
+function displayFlashMessage() {
+    if (!session_id()) session_start();
+    if (isset($_SESSION['flash_message'])) {
+        $flash = $_SESSION['flash_message'];
+        echo "<script>alert('{$flash['type']}: {$flash['message']}');</script>";
+        unset($_SESSION['flash_message']);
     }
 }

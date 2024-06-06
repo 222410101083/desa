@@ -12,11 +12,13 @@ class DashboardPemerintahController {
             $proposals = Proposal::getAllProposals();
             $approvedProposals = Proposal::getApprovedProposals();
             $declinedProposals = Proposal::getDeclinedProposals();
+            $pendingProposals = Proposal::getPendingProposals();
             view('pemerintah/dashboard/layout', [
                 'url' => 'home',
                 'proposals' => $proposals,
                 'approvedProposals' => $approvedProposals,  
                 'declinedProposals' => $declinedProposals,
+                'pendingProposals' => $pendingProposals,
             ]);
         }
     }
@@ -31,21 +33,6 @@ class DashboardPemerintahController {
             view('pemerintah/dashboard/layout', [
                 'url' => 'proposal',
                 'proposals' => $proposals,
-            ]);
-        }
-    }
-    static function grafikProposal()
-    {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'pemerintah') {
-            header('Location: ' . BASEURL . 'login?auth=false');
-            exit;
-        } else {
-            $proposals = Proposal::getAllProposals();
-            $approvedProposals = Proposal::getApprovedProposals();
-            view('pemerintah/dashboard/layout', [
-                'url' => 'grafik',
-                'proposals' => $proposals,
-                'approvedProposals' => $approvedProposals,
             ]);
         }
     }

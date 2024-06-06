@@ -1,6 +1,5 @@
-
-<div class="bg-gray-100">
-    <div class="container mx-auto px-4">
+<div class="bg-gray-100 h-full w-full">
+    <div class="mx-auto px-4">
         <div class="max-w-2xl mx-auto my-10 bg-white p-5 rounded shadow">
             <h2 class="text-2xl font-bold mb-6 text-gray-800">Tambah Proposal</h2>
             <form action="<?= urlpath('masyarakat/proposal/add'); ?>" method="POST" enctype="multipart/form-data">

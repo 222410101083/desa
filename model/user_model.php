@@ -29,26 +29,34 @@ class User
         extract($data);
         global $conn;
 
-        // Menyiapkan timestamp untuk pencatatan waktu pendaftaran
+        // Periksa apakah email sudah terdaftar
+        $query = "SELECT email FROM users WHERE email = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            return 'Email sudah terdaftar';
+        }
+
+        // Jika email belum terdaftar, lanjutkan dengan pendaftaran
         $inserted_at = date('Y-m-d H:i:s', strtotime('now'));
-        // Mengenkripsi password
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        // Menambahkan role ke dalam query SQL
         $sql = "INSERT INTO users (name, email, password, role, inserted_at) VALUES (?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
         if ($stmt === false) {
             throw new Exception('Failed to prepare statement: ' . $conn->error);
         }
 
-        // Mengikat parameter ke statement
         $stmt->bind_param('sssss', $name, $email, $hashedPassword, $role, $inserted_at);
         $stmt->execute();
 
-        // Memeriksa apakah query berhasil
-        $result = $stmt->affected_rows > 0 ? true : false;
-        $stmt->close();
-        return $result;
+        if ($stmt->affected_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     static function createUserByAdmin($name, $email, $password, $role)

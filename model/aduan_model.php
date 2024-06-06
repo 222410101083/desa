@@ -96,13 +96,15 @@ class Aduan {
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
+    public static function getUserFilteredAduan($searchText, $user_id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM aduan WHERE id_pengadu = ? AND (judul LIKE ? OR deskripsi LIKE ? OR tanggal LIKE ? OR kategori LIKE ?)";
+        $stmt = $conn->prepare($sql);
+        $searchText = "%$searchText%";
+        $stmt->bind_param("sssss", $user_id, $searchText, $searchText, $searchText, $searchText);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
     
-    // public static function cariAduan($keyword) {
-    //     global $conn;
-    //     $stmt = $conn->prepare("SELECT * FROM aduan WHERE nama_pengadu LIKE ? OR judul LIKE ?");
-    //     $searchTerm = '%' . $keyword . '%';
-    //     $stmt->bind_param("ss", $searchTerm, $searchTerm);
-    //     $stmt->execute();
-    //     return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    // }
 }
