@@ -1,4 +1,4 @@
-<?php $body = ob_get_clean(); ?>
+
 <?php include 'view/master.php'; ?>
 <div class="container mx-auto px-4">
     <h1 class="text-2xl font-bold text-left my-6">Daftar Artikel</h1>

@@ -36,27 +36,13 @@ include 'view/master.php';
     </div>
 </nav>
 <div class="bg-white font-family-karla">
-
-    <!-- Topic Nav -->
-    <nav class="w-full py-4 border-t border-b bg-gray-100" x-data="{ open: false }">
-        <div class="block sm:hidden">
-            <a href="#" class=" md:hidden text-base font-bold uppercase text-center flex justify-center items-center"
-                @click="open = !open">
-                Topics <i :class="open ? 'fa-chevron-down': 'fa-chevron-up'" class="fas ml-2"></i>
-            </a>
-        </div>
-    </nav>
-
-
     <div class="container mx-auto flex flex-wrap py-6">
-
         <!-- Post Section -->
         <section class="w-full md:w-2/3 flex flex-col items-center px-3">
-
             <article class="flex flex-col shadow my-4">
                 <!-- Article Image -->
                 <a href="#" class="hover:opacity-75">
-                    <img src="<?= BASEURL ?>/<?= $artikel['gambar'] ?>">
+                    <img class="w-1/2" src="<?= BASEURL ?>/<?= $artikel['gambar'] ?>">
                 </a>
                 <div class="bg-white flex flex-col justify-start p-6">
                     <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4"><?= $artikel['judul'] ?></a>

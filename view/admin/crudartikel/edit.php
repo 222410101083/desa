@@ -1,7 +1,7 @@
 <?php include 'view/master.php'; ?>
 
-<div class="bg-gray-100 p-8 w-full h-screen">
-    <div class="bg-white p-6 shadow rounded w-full">
+<div class="container mx-auto px-4 bg-gray-100 p-8 w-full h-screen">
+    <div class="container mx-auto px-4 bg-white p-6 shadow rounded w-full">
         <form action="<?= urlpath('admin/artikel/add'); ?>" method="post" enctype="multipart/form-data" class="space-y-4">
             <div>
                 <label for="judul" class="block text-sm font-medium text-gray-700">Judul</label>
