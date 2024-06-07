@@ -1,8 +1,8 @@
 RewriteEngine On
-RewriteBase /pweb/
+RewriteBase /uas/
 RewriteRule ^index\\.php$ - [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /pweb/index.php [L]
+RewriteRule . /uas/index.php [L]
 RewriteCond %{REQUEST_URI} ^/src/
 RewriteRule ^ - [L]

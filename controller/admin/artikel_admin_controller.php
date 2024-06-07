@@ -1,7 +1,6 @@
 <?php
 // include_once("../model/artikel_model.php");
 include_once 'model/artikel_model.php';
-
 class ArtikelAdminController
 {
     static function getAllArtikel()
@@ -54,7 +53,7 @@ class ArtikelAdminController
             // Menambahkan artikel dengan atau tanpa gambar
             Artikel::addArtikel($judul, $konten, $target_file, $penulis);
             setFlashMessage('Berhasil', 'Berhasil menambahkan artikel!');
-                header('Location: ' . BASEURL . 'admin/artikel?tambahartikel=true');
+            header('Location: ' . BASEURL . 'admin/artikel?tambahartikel=true');
             return;
         }
     }
@@ -74,17 +73,53 @@ class ArtikelAdminController
             view('admin/dashboard/layout', ['url' => 'view/admin/crudartikel/edit', 'artikel' => $artikel]);
         }
     }
+    static function updateArtikel()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id_artikel = $_GET['id'] ?? '';
+            $judul = $_POST['judul'] ?? '';
+            $konten = $_POST['konten'] ?? '';
+            $penulis = $_SESSION['user']['id'] ?? '';
+
+            // Mengambil data artikel saat ini untuk mendapatkan gambar yang ada
+            $artikelSaatIni = Artikel::getArtikelById($id_artikel);
+            $gambarSaatIni = $artikelSaatIni['gambar'] ?? '';
+
+            $gambar = $_FILES['gambar']['name'] ?? '';
+            $target_file = $gambarSaatIni; // Default ke gambar saat ini
+
+            if (!empty($gambar)) {
+                $target_dir = "src/thumbnail/";
+                $target_file = $target_dir . basename($gambar);
+                if (!move_uploaded_file($_FILES["gambar"]["tmp_name"], $target_file)) {
+                    setFlashMessage('Gagal', 'Gagal mengupload gambar!');
+                    header('Location: ' . BASEURL . 'admin/artikel?editartikel=true');
+                    return;
+                }
+            }
+
+            $result = Artikel::updateArtikel($id_artikel, $judul, $konten, $target_file, $penulis);
+            if ($result === true) {
+                setFlashMessage('Berhasil', 'Artikel berhasil diperbarui!');
+                header('Location: ' . BASEURL . 'admin/artikel');
+            } else {
+                setFlashMessage('Gagal', $result); // Menampilkan pesan error dari model
+                header('Location: ' . BASEURL . 'admin/artikel?editartikel=true');
+            }
+        }
+    }
     static function deleteArtikel()
     {
         if (isset($_GET['id'])) {
             $id_artikel = $_GET['id'];
             Artikel::deleteArtikel($id_artikel);
             setFlashMessage('Berhasil', 'Berhasil menghapus artikel!');
-            header('Location: ' . BASEURL . 'admin/artikel?tambahartikel=true');
+            header('Location: ' . BASEURL . 'admin/artikel');
             return;
         }
     }
-    public function detail() {
+    public function detail()
+    {
         $id = $_GET['id'];
         $artikel = Artikel::getArtikelById($id);
         if (!$artikel) {
@@ -95,4 +130,3 @@ class ArtikelAdminController
         return view('admin/dashboard/artikel', ['artikel' => $artikel]);
     }
 }
-

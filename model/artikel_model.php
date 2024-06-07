@@ -29,12 +29,22 @@ class Artikel
     }
     
 
-    static function updateArtikel($id, $judul, $gambar, $isi, $penulis)
+    static function updateArtikel($id_artikel, $judul, $konten, $gambar, $penulis)
     {
         global $conn;
-        $stmt = $conn->prepare("UPDATE artikel SET judul=?, gambar=?, isi=?, penulis=? WHERE id=?");
-        $stmt->bind_param("ssssi", $judul, $gambar, $isi, $penulis, $id);
-        $stmt->execute();
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $judul)));
+        $stmt = $conn->prepare("UPDATE artikel SET judul=?, konten=?, gambar=?, penulis=?, slug=?, created_at=NOW() WHERE id_artikel=?");
+        if ($stmt) {
+            $stmt->bind_param("sssssi", $judul, $konten, $gambar, $penulis, $slug, $id_artikel);
+            $stmt->execute();
+            if ($stmt->affected_rows > 0) {
+                return true;
+            } else {
+                return false; // Tidak ada baris yang terpengaruh, mungkin ID tidak ditemukan
+            }
+        } else {
+            return false; // Gagal dalam menyiapkan statement
+        }
     }
     static function getArtikelById($id) {
         global $conn;

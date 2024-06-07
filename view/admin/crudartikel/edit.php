@@ -1,8 +1,8 @@
 <?php include 'view/master.php'; ?>
 
-<div class="container mx-auto px-4 bg-gray-100 p-8 w-full h-screen">
+<div class="container mx-auto px-4 bg-gray-100 p-8 w-full">
     <div class="container mx-auto px-4 bg-white p-6 shadow rounded w-full">
-        <form action="<?= urlpath('admin/artikel/add'); ?>" method="post" enctype="multipart/form-data" class="space-y-4">
+        <form action="<?= urlpath('admin/artikel/edit?id=' . $artikel['id_artikel']); ?>" method="post" enctype="multipart/form-data" class="space-y-4">
             <div>
                 <label for="judul" class="block text-sm font-medium text-gray-700">Judul</label>
                 <input type="text" id="judul" name="judul" required value="<?= $artikel['judul']; ?>"
@@ -22,7 +22,8 @@
                 <!-- Hidden textarea to store the content -->
                 <textarea name="konten" style="display:none;" id="hiddenArea"><?= $artikel['konten']; ?></textarea>
             </div>
-            <input type="submit" value="Tambah"
+            <a href="<?= urlpath('admin/artikel'); ?>" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">Kembali</a>
+            <input type="submit" value="Simpan"
                 class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
         </form>
     </div>

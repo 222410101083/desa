@@ -63,7 +63,7 @@ class profilPemerintahController
 
                 if (in_array($fileExtension, ['png', 'jpg', 'jpeg'])) {
                     $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
-                    $uploadFileDir = './src/foto/';
+                    $uploadFileDir = 'src/foto/';
                     $dest_path = $uploadFileDir . $newFileName;
 
                     if (move_uploaded_file($fileTmpPath, $dest_path)) {

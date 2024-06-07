@@ -29,6 +29,7 @@ Router::url('admin/logout', 'get', 'AuthController::logout');
 #Admin POST
 Router::url('tambahakun/tambahakunpemerintah', 'post', 'AdminController::saveTambahAkunPemerintah');
 Router::url('admin/artikel/add', 'post', 'ArtikelAdminController::storeArtikel');
+Router::url('admin/artikel/edit', 'post', 'ArtikelAdminController::updateArtikel');
 
 #Pemerintah
 Router::url('pemerintah/dashboard', 'get', 'DashboardPemerintahController::index');
