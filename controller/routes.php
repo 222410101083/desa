@@ -8,6 +8,10 @@ Router::url('/', 'get', function () { return view('home'); });
 Router::url('login', 'get', 'AuthController::login');
 Router::url('register', 'get', 'AuthController::register');
 Router::url('artikel', 'get', 'ArtikelController::showListArtikel');
+Router::url('artikel/{slug}', 'get', 'ArtikelController::detail');
+Router::url('artikel/{id}', 'get', 'ArtikelController::detailartikel');
+Router::url('artikel/detail', 'get', 'ArtikelController::showDetailArtikel');
+
 
 #Admin
 Router::url('admin/dashboard', 'get', 'AdminController::dashboard');
@@ -17,7 +21,7 @@ Router::url('admin/pemerintah/edit', 'get', 'AdminController::EditAkunPemerintah
 Router::url('admin/pemerintah/hapus', 'get', 'AdminController::HapusAkunPemerintah');
 Router::url('admin/artikel', 'get', 'ArtikelAdminController::getAllArtikel');
 Router::url('admin/artikel/add', 'get', 'ArtikelAdminController::showAddArtikel');
-Router::url('admin/artikel/edit', 'get', 'ArtikelAdminController::editArtikel');
+Router::url('admin/artikel/edit', 'get', 'ArtikelAdminController::showEditArtikel');
 Router::url('admin/artikel/detail', 'get', 'ArtikelAdminController::showDetailArtikel');
 Router::url('admin/artikel/delete', 'get', 'ArtikelAdminController::deleteArtikel');
 Router::url('admin/profil', 'get', 'AdminController::profil');
@@ -77,8 +81,6 @@ Router::url('masyarakat/aduan/add', 'post', 'AduanMasyakatController::store');
 Router::url('login', 'post', 'AuthController::saveLogin');
 Router::url('register', 'post', 'AuthController::saveRegister');
 Router::url('admin/dashboard', 'post', 'AdminController::tambahakun');
-Router::url('contacts/add', 'post', 'ContactController::saveAdd');
-Router::url('contacts/edit', 'post', 'ContactController::saveEdit');
 
 
 # API GET

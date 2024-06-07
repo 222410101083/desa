@@ -3,7 +3,7 @@
 <div class="container mx-auto px-4">
     <h1 class="text-2xl font-bold text-left my-6">Daftar Artikel</h1>
     <div class="flex justify-between">
-        <a href="artikel/add"><button
+        <a href="<?= BASEURL . "admin/artikel/add" ?>"><button
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Tambah
                 Artikel</button></a>
         <div class="mb-4">
@@ -24,8 +24,11 @@
             </thead>
             <tbody class="text-gray-700">
                 <?php
+                if (!isset($artikel) || !is_array($artikel)) {
+                    $artikel = [];
+                }
                 $no = 1;
-                foreach ($artikel as $artikels):    
+                foreach ($artikel as $artikels):
                     ?>
                     <tr class="border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-4"><?= $no++; ?></td>
@@ -33,7 +36,7 @@
                         <td class="py-3 px-4"><?= ($artikels['name']) ?></td>
                         <td class="py-3 px-4"><img src="<?= BASEURL . $artikels['gambar'] ?>" alt="" class="w-auto h-24"></td>
                         <td class="py-3 px-4 flex justify-center items-center">
-                            <a href="<?= BASEURL . "admin/artikel/detail?id=" . $artikels['id_artikel'] ?>"
+                            <a href="<?= BASEURL . "artikel/detail?id=" . $artikels['id_artikel'] ?>"
                                 class="ml-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat</a>
                             <a href="<?= BASEURL . "admin/artikel/edit?id=" . $artikels['id_artikel'] ?>"
                                 class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-4">Edit</a>

@@ -5,12 +5,13 @@
         <form action="<?= urlpath('admin/artikel/add'); ?>" method="post" enctype="multipart/form-data" class="space-y-4">
             <div>
                 <label for="judul" class="block text-sm font-medium text-gray-700">Judul</label>
-                <input type="text" id="judul" name="judul" required
+                <input type="text" id="judul" name="judul" required value="<?= $artikel['judul']; ?>"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             </div>
             <div>
                 <label for="gambar" class="block text-sm font-medium text-gray-700">Thumbnail</label>
-                <input type="file" id="gambar" name="gambar"
+                    <img src="<?= urlpath($artikel['gambar']); ?>" class="h-24">
+                <input type="file" id="gambar" name="gambar" value="<?= $artikel['gambar']; ?>"
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
             </div>
             <div>
@@ -19,7 +20,7 @@
                     class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                     style="min-height: 150px; height: 380px; width: 100%;"></div>
                 <!-- Hidden textarea to store the content -->
-                <textarea name="konten" style="display:none;" id="hiddenArea"></textarea>
+                <textarea name="konten" style="display:none;" id="hiddenArea"><?= $artikel['konten']; ?></textarea>
             </div>
             <input type="submit" value="Tambah"
                 class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
@@ -49,6 +50,12 @@
                     ['link', 'image', 'video']                        // link and image, video
                 ]
             }
+        });
+
+        // Set konten editor dengan data dari PHP
+        document.addEventListener('DOMContentLoaded', function() {
+            var konten = `<?= addslashes($artikel['konten']); ?>`;
+            quill.root.innerHTML = konten;
         });
 
         // Enable Image Upload
@@ -83,5 +90,23 @@
             var konten = document.querySelector('textarea[name=konten]');
             konten.value = quill.root.innerHTML;
         };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var inputGambar = document.getElementById('gambar');
+            var imgPreview = document.querySelector('img[src="<?= urlpath($artikel['gambar']); ?>"]');
+
+            inputGambar.addEventListener('change', function(event) {
+                var file = event.target.files[0];
+                var reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    imgPreview.src = e.target.result;
+                };
+
+                if (file) {
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
     </script>
 </div>

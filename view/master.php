@@ -10,6 +10,7 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
 
+
     <!-- <link href="./src/css/style.css" rel="stylesheet"> -->
     <title><?= $title ?? ''; ?></title>
 </head>

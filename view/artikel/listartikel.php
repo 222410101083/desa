@@ -49,7 +49,7 @@
                                     <?= $item['created_at'] ?>
                                 </span>
                             </div>
-                            <h3 class="mb-4 font-semibold  text-2xl"><a href="/artikel/detail/<?= $item['id']; ?>"
+                            <h3 class="mb-4 font-semibold  text-2xl"><a href="<?= BASEURL . "artikel/detail?id=" . $item['id_artikel'] ?>"
                                     class="transition-all text-blue-900 hover:text-blue-600"><?= $item['judul']; ?></a>
                             </h3>
                             <p class="text-sky-800 text-sm mb-0">

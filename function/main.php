@@ -18,33 +18,30 @@ class Router {
             )
         );
 
-        // Cek jika pengguna sudah login
-        if (isset($_SESSION['user'])) {
-            $role = $_SESSION['user']['role'];
-            $dashboard = $this->determineDashboard($role);
-
-            // Cek jika URL adalah halaman login
-            if (strpos($url, 'login') !== false) {
-                header('Location: '.BASEURL.$dashboard);
-                exit;
-            }
-
-            // Cek jika URL mengandung dashboard yang tidak sesuai dengan peran pengguna
-            if (strpos($url, 'dashboard') !== false && strpos($url, $dashboard) === false) {
-                header('Location: '.BASEURL.$dashboard);
-                exit;
-            }
-        }
-
-        // Cek jika URL tidak ada dalam daftar rute
-        if (!array_key_exists($url, self::$urls[$_SERVER['REQUEST_METHOD']])) {
+        $method = $_SERVER['REQUEST_METHOD'];
+        if (!isset(self::$urls[$method][$url])) {
             header("HTTP/1.0 404 Not Found");
             include 'view/component/404.php';
             exit;
         }
 
-        $call = self::$urls[$_SERVER['REQUEST_METHOD']][$url];
-        $call();
+        $callback = self::$urls[$method][$url];
+        $params = $this->extractParams($url, $_SERVER['REQUEST_URI']); // Fungsi untuk mengekstrak parameter
+        call_user_func_array($callback, $params);
+    }
+
+    public function extractParams($urlPattern, $requestedUrl) {
+        $params = [];
+        $pattern = preg_replace('/\{(\w+)\}/', '(?P<$1>[^/]+)', $urlPattern);
+        $pattern = str_replace('/', '\/', $pattern);
+        if (preg_match('/^' . $pattern . '$/', $requestedUrl, $matches)) {
+            foreach ($matches as $key => $value) {
+                if (!is_int($key)) { // Hanya ambil named capture group
+                    $params[$key] = $value;
+                }
+            }
+        }
+        return $params;
     }
 
     private function determineDashboard($role) {

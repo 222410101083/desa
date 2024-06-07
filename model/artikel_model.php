@@ -20,8 +20,11 @@ class Artikel
     static function addArtikel($judul, $konten, $gambar, $penulis)
     {
         global $conn;
-        $stmt = $conn->prepare("INSERT INTO artikel (judul, konten, gambar, penulis, created_at) VALUES (?, ?, ?, ?, NOW())");
-        $stmt->bind_param("ssss", $judul, $konten, $gambar, $penulis);
+        // Membuat slug dari judul
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $judul)));
+
+        $stmt = $conn->prepare("INSERT INTO artikel (judul, konten, gambar, penulis, slug, created_at) VALUES (?, ?, ?, ?, ?, NOW())");
+        $stmt->bind_param("sssss", $judul, $konten, $gambar, $penulis, $slug);
         $stmt->execute();
     }
     
@@ -32,12 +35,10 @@ class Artikel
         $stmt = $conn->prepare("UPDATE artikel SET judul=?, gambar=?, isi=?, penulis=? WHERE id=?");
         $stmt->bind_param("ssssi", $judul, $gambar, $isi, $penulis, $id);
         $stmt->execute();
-        $stmt->close();
-        $conn->close();
     }
     static function getArtikelById($id) {
         global $conn;
-        $sql = "SELECT * FROM artikel WHERE id = ?";
+        $sql = "SELECT * FROM artikel JOIN users ON artikel.penulis = users.id WHERE id_artikel = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -76,5 +77,13 @@ class Artikel
         $stmt = $conn->prepare("DELETE FROM artikel WHERE id_artikel = ?");
         $stmt->bind_param("i", $id_artikel);
         $stmt->execute();
+    }
+    static function getArtikelBySlug($slug) {
+        global $conn;
+        $stmt = $conn->prepare("SELECT * FROM artikel WHERE slug = ?");
+        $stmt->bind_param("s", $slug);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
 }
