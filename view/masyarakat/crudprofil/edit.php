@@ -11,42 +11,42 @@
                 <img id="avatarImage" class="object-cover h-24 w-24 rounded-full " src="<?= BASEURL.$user['avatar'] ?>" alt="Foto Profil">
             </div>
         </div>
-        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+        <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 items-center">
             <dt class="text-sm font-medium text-gray-500">
                 Foto Profil
             </dt>
-            <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <dd class="mt-1 text-sm text-gray-900  sm:col-span-2">
                 <input type="file" name="avatar" id="avatarInput"
-                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm rounded-md">
             </dd>
         </div>
-        <div class="border-t border-gray-200 px-4 py-5 sm:p-0">
+        <div class="border-t border-gray-200 px-4 py-5 p-0">
             <dl class="sm:divide-y sm:divide-gray-200">
-                <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="py-3  sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 items-center">
                     <dt class="text-sm font-medium text-gray-500">
                         Nama Lengkap
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <dd class="mt-1 text-sm text-gray-900  sm:col-span-2">
                         <input type="text" name="name" value="<?= $user['name']; ?>"
-                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            class="p-2 mt-1 border-2 h-10 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm rounded-md">
                     </dd>
                 </div>
-                <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 items-center">
                     <dt class="text-sm font-medium text-gray-500">
                         Alamat Email
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <dd class="mt-1 text-sm text-gray-900  sm:col-span-2">
                         <input type="email" name="email" value="<?= $user['email']; ?>"
-                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            class="p-2 mt-1 border-2 h-10 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm rounded-md">
                     </dd>
                 </div>
-                <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div class="py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 items-center">
                     <dt class="text-sm font-medium text-gray-500">
                         Nomor HP
                     </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                    <dd class="mt-1 text-sm text-gray-900  sm:col-span-2 items-center">
                         <input type="text" name="nomor_hp" value="<?= $user['nomor_hp']; ?>"
-                            class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            class="p-2 mt-1 border-2 h-10 border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm rounded-md">
                     </dd>
                 </div>
             </dl>

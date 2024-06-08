@@ -15,12 +15,14 @@ class DashboardMasyarakatController
             $userDeclinedProposals = Proposal::getProposalsDeclinedByUserId($userId);
             $userPendingProposals = Proposal::getProposalsPendingByUserId($userId);
             $userApprovedProposals = Proposal::getProposalsApprovedByUserId($userId);
+            $aduans = Aduan::getAduanCountByCategory();
             view('masyarakat/dashboard/layout', [
                 'url' => 'home',
                 'userProposals' => $userProposals,
                 'userDeclinedProposals' => $userDeclinedProposals,
                 'userPendingProposals' => $userPendingProposals,
                 'userApprovedProposals' => $userApprovedProposals,
+                'aduans' => $aduans
             ]);
         }
     }

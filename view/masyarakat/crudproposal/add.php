@@ -5,20 +5,27 @@
             <form action="<?= urlpath('masyarakat/proposal/add'); ?>" method="POST" enctype="multipart/form-data">
                 <div class="mb-4">
                     <label for="judul" class="block text-gray-700 text-sm font-bold mb-2">Judul:</label>
-                    <input type="text" id="judul" name="judul" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="text" id="judul" name="judul" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 </div>
                 <div class="mb-4">
                     <label for="deskripsi" class="block text-gray-700 text-sm font-bold mb-2">Deskripsi:</label>
-                    <textarea id="deskripsi" name="deskripsi" rows="4" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <textarea id="deskripsi" name="deskripsi" rows="4" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
                 </div>
                 <div class="mb-4">
                     <label for="file" class="block text-gray-700 text-sm font-bold mb-2">File Proposal (PDF):</label>
-                    <input type="file" id="file" name="file" accept=".pdf" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    <input type="file" id="file" name="file" accept=".pdf" required
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 </div>
-                <div class="flex items-center justify-between">
-                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+                <div class="flex items-center justify-center gap-x-4">
+                    <a href="#" onclick="history.back()"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Batal</a>
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+
                 </div>
             </form>
         </div>
     </div>
-<?php include 'view/master.php'; ?>
+    <?php include 'view/master.php'; ?>

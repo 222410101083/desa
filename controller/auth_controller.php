@@ -48,7 +48,7 @@ class AuthController {
         $existingUser = User::getUserByEmail($post['email']);
         if ($existingUser) {
             setFlashMessage('Maaf', 'Email sudah terdaftar');
-            header('Location: '.BASEURL.'register?error=user_exists');
+            header('Location: '.BASEURL.'register');
             exit; // Berhenti eksekusi lebih lanjut
         }
 
@@ -61,13 +61,13 @@ class AuthController {
         ]);
 
         if ($user) {
-            $_SESSION['success'] = 'Berhasil mendaftar, silakan login';
+            setFlashMessage('Berhasil', 'Berhasil mendaftar, silakan login');
             header('Location: '.BASEURL.'login');
 
         }
         else {
-            $_SESSION['error'] = 'Gagal mendaftar, silakan coba lagi';
-            header('Location: '.BASEURL.'register?failed=true');
+            setFlashMessage('Gagal', 'Gagal mendaftar, silakan coba lagi');
+            header('Location: '.BASEURL.'register');
         }
     }
     static function logout() {
@@ -89,6 +89,4 @@ class AuthController {
         // Arahkan kembali ke halaman utama
         header('Location: '.BASEURL);
     }
-
-    static function forgotPassword() {}
 }

@@ -23,6 +23,17 @@ class AduanMasyakatController
         Aduan::addAduan($_POST);
         header('Location: ' . BASEURL . 'masyarakat/aduan');
     }
+    public static function viewDetailAduan()
+    {
+        $id_aduan = $_GET['id'];
+        $aduan = Aduan::getAduanById($id_aduan);
+        view('masyarakat/dashboard/layout', ['url' => 'view/masyarakat/crudaduan/detailaduan', 'aduan' => $aduan]);
+    }
+    public static function viewAduanByKategori()
+    {
+        $kategori = $_GET['kategori'];
+        $aduans = Aduan::getAduanCountByCategory();
+    }
 
     public static function cariAduan()
     {

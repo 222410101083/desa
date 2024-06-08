@@ -17,13 +17,13 @@
         <tbody>
             <?php $no = 1;
             foreach ($aduan as $aduans): ?>
-                <tr class="text-center">
-                    <td class="border px-4 py-2"><?= $no++; ?></td>
-                    <td class="border px-4 py-2"><?= $aduans['nama_pengadu'] ?></td>
-                    <td class="border px-4 py-2"><?= $aduans['judul'] ?></td>
-                    <td class="border px-4 py-2"><?= $aduans['deskripsi'] ?></td>
-                    <td class="border px-4 py-2"><?= $aduans['kategori'] ?></td>
-                    <td class="border px-4 py-2"><?= $aduans['tanggal'] ?></td>
+                <tr class="border-b border-gray-200">
+                    <td class="px-4 py-2"><?= $no++; ?></td>
+                    <td class="px-4 py-2"><?= $aduans['nama_pengadu'] ?></td>
+                    <td class="px-4 py-2"><?= $aduans['judul'] ?></td>
+                    <td class="px-4 py-2"><?= $aduans['deskripsi'] ?></td>
+                    <td class="px-4 py-2"><?= $aduans['kategori'] ?></td>
+                    <td class="px-4 py-2"><?= $aduans['tanggal'] ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

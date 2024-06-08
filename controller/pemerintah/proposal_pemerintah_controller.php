@@ -168,10 +168,15 @@ class ProposalPemerintahController
             } elseif ($proposal['status'] === 'Ditinjau') {
                 $statusClass = 'bg-yellow-100 hover:bg-yellow-200';
             }
+            $words = explode(" ", $proposal['deskripsi']);
+            $short_description = implode(" ", array_slice($words, 0, 8));
+            if (count($words) > 8) {
+                $short_description .= "...";
+            }
             echo "<tr class='border-b border-gray-200 $statusClass'>";
             echo "<td class='py-3 px-4'>" . $no++ . "</td>";
             echo "<td class='py-3 px-4'>" . $proposal['judul'] . "</td>";
-            echo "<td class='py-3 px-4'>" . $proposal['deskripsi'] . "</td>";
+            echo "<td class='py-3 px-4'>" . $short_description . "</td>";
             echo "<td class='py-3 px-4'>" . $proposal['tanggal_pengajuan'] . "</td>";
             echo "<td class='py-3 px-4'>" . $proposal['nama_pengaju'] . "</td>";
             echo "<td class='py-3 px-4'>" . $proposal['status'] . "</td>";

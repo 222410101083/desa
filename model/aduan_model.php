@@ -72,5 +72,21 @@ class Aduan
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-
+    public static function getAduanById($id_aduan)
+    {
+        global $conn;
+        $sql = "SELECT * FROM aduan WHERE id_aduan = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $id_aduan);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+    public static function getAduanCountByCategory() {
+        global $conn;
+        $query = "SELECT kategori, COUNT(*) as jumlah FROM aduan GROUP BY kategori";
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();  
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }

@@ -12,20 +12,26 @@
                 <tr class="border-b border-gray-200">
                     <th class="w-1/5 py-3 px-4 uppercase font-semibold text-left">Nomor</th>
                     <th class="w-1/5 py-3 px-4 uppercase font-semibold text-left">Judul</th>
-                    <th class="w-1/5 py-3 px-4 uppercase font-semibold text-left"">Deskripsi</th>
                     <th class=" w-1/5 py-3 px-4 uppercase font-semibold text-left"">Kategori</th>
                     <th class="w-1/5 py-3 px-4 uppercase font-semibold text-left"">Tanggal</th>
+                    <th class="w-1/5 py-3 px-4 uppercase font-semibold text-left"">Aksi</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 1;
+                if (!is_array($aduans)) {
+                    $aduans = []; // Inisialisasi sebagai array kosong jika bukan array
+                }
                 foreach ($aduans as $aduan): ?>
+                
                     <tr class=" border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-4""><?= $no++; ?></td>
                         <td class=" py-3 px-4""><?= $aduan['judul'] ?></td>
-                        <td class="py-3 px-4""><?= $aduan['deskripsi'] ?></td>
                         <td class=" py-3 px-4""><?= $aduan['kategori'] ?></td>
                         <td class="py-3 px-4""><?= $aduan['tanggal'] ?></td>
+                        <td class="py-3 px-4"">
+                            <a href="<?= urlpath('masyarakat/aduan/detail?id=' . $aduan['id_aduan']) ?>" class=" text-blue-500 hover:text-blue-700 text-center font-bold mb-3 h-10">Detail Aduan</a>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
