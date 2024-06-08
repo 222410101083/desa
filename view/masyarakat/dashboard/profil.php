@@ -14,8 +14,8 @@ $user = $_SESSION['user'];
         <dl class="sm:divide-y sm:divide-gray-200">
             <!-- Tambahkan avatar di sini -->
             <div class="">
-                <div class="sm:col-span-1 flex sm:justify-center mt-2 mb-2">
-                    <img class="h-24 w-24 rounded-full" src="<?= BASEURL . $user['avatar'] ?>"
+                <div class="sm:col-span-1 flex sm:justify-center mt-2 mb-2 object-cover">
+                    <img class="object-cover h-24 w-24 rounded-full" src="<?= BASEURL . $user['avatar'] ?>"
                         alt="Foto Profil">
                 </div>
             </div>

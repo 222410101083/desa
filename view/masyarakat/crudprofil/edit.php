@@ -7,8 +7,8 @@
     <form action="<?= BASEURL . 'masyarakat/profil/edit?id=' . $user['id']; ?>" method="POST"
         enctype="multipart/form-data">
         <div class="">
-            <div class="sm:col-span-1 flex sm:justify-center mt-2 mb-2">
-                <img class="h-24 w-24 rounded-full" src="<?= BASEURL.$user['avatar'] ?>" alt="Foto Profil">
+            <div class="sm:col-span-1 flex sm:justify-center mt-2 mb-2 object-cover">
+                <img id="avatarImage" class="object-cover h-24 w-24 rounded-full " src="<?= BASEURL.$user['avatar'] ?>" alt="Foto Profil">
             </div>
         </div>
         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -16,7 +16,7 @@
                 Foto Profil
             </dt>
             <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                <input type="file" name="avatar"
+                <input type="file" name="avatar" id="avatarInput"
                     class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
             </dd>
         </div>
@@ -55,10 +55,21 @@
             <a href="#" onclick="history.back();"
                 class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mx-2">Batal</a>
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-2">
-                Simpan Perubahan
+                Simpan
             </button>
         </div>
     </form>
 </div>
 <?php
 include 'view/master.php'; ?>
+
+<script>
+document.getElementById('avatarInput').addEventListener('change', function(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('avatarImage').src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+});
+</script>

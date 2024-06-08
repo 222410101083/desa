@@ -2,7 +2,7 @@
 <div class="container mx-auto px-4 mt-2">
     <h1 class="text-2xl font-bold text-gray-900 my-4">Daftar Aduan</h1>
     <div class="flex justify-between mt-2">
-        <a href="<?= urlpath('masyarakat/aduan/add') ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-3">Buat Aduan
+        <a href="<?= urlpath('masyarakat/aduan/add') ?>" class="bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded mb-3 h-10">Buat Aduan
             Baru</a>
         <input type="text" id="searchInput" placeholder="Cari Aduan" class="mb-4 px-4 py-2 border rounded">
     </div>
