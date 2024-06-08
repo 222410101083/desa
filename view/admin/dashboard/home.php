@@ -11,7 +11,7 @@
                             <div class="mt-auto">
                                 <img src="<?= BASEURL ?>/<?= $item['gambar'] ?>" alt="" class="w-full h-40 object-cover">
                             </div>
-                            <h3 class="mb-4 font-semibold  text-2xl"><a href=""
+                            <h3 class="mb-4 font-semibold  text-2xl"><a href="<?= urlpath('artikel/detail?id=' . $item['id_artikel']) ?>"
                                     class="transition-all text-blue-900 hover:text-blue-600"><?= $item['judul']; ?></a>
                             </h3>
                             <p class="text-sky-800 text-sm mb-0">

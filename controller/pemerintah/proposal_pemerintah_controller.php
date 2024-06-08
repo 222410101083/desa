@@ -5,6 +5,10 @@ class ProposalPemerintahController
 {
     static function showEditProposal()
     {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'pemerintah') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        }
         $id_proposal = $_GET['id'];
         $currentProposal = Proposal::getProposalById($id_proposal);
         if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'pemerintah') {
@@ -89,7 +93,7 @@ class ProposalPemerintahController
 
     static function removeProposal()
     {
-        if (!isset($_SESSION['user'])) {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'pemerintah') {
             header('Location: ' . BASEURL . 'login?auth=false');
             exit;
         } else {

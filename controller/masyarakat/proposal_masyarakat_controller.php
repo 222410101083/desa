@@ -83,12 +83,14 @@ class ProposalMasyarakatController
         $id_proposal = $_GET['id'];
         $currentProposal = Proposal::getProposalById($id_proposal);
         if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
-            header('Location: ' . BASEURL . 'login?auth=false');
+            setFlashMessage('Gagal', 'Anda tidak memiliki akses ke halaman ini');
+            header('Location: ' . BASEURL . 'login');
             exit;
         }
 
         if ($currentProposal['status'] === 'Disetujui') {
-            header('Location: ' . BASEURL . 'masyarakat/proposal?edit=denied');
+            setFlashMessage('Gagal', 'Proposal sudah disetujui');
+            header('Location: ' . BASEURL . 'masyarakat/proposal');
             exit;
         }
 
@@ -99,10 +101,12 @@ class ProposalMasyarakatController
             if ($proposal) {
                 view('masyarakat/dashboard/layout', ['url' => 'view/masyarakat/crudproposal/edit', 'proposal' => $proposal]);
             } else {
-                header('Location: ' . BASEURL . 'masyarakat/proposal?error=notfound');
+                setFlashMessage('Gagal', 'Proposal tidak ditemukan');
+                header('Location: ' . BASEURL . 'masyarakat/proposal');
             }
         } else {
-            header('Location: ' . BASEURL . 'masyarakat/proposal?error=missingid');
+            setFlashMessage('Gagal', 'Proposal tidak ditemukan');
+            header('Location: ' . BASEURL . 'masyarakat/proposal');
         }
     }
 

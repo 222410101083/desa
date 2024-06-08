@@ -6,13 +6,23 @@ class AduanMasyakatController
 {
     public static function getAduanByUserId()
     {
-        $aduans = Aduan::getAduanByUserId($_SESSION['user']['id']);
-        view('masyarakat/dashboard/layout', ['url' => 'view/masyarakat/dashboard/aduan', 'aduans' => $aduans]);
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        } else {
+            $aduans = Aduan::getAduanByUserId($_SESSION['user']['id']);
+            view('masyarakat/dashboard/layout', ['url' => 'view/masyarakat/dashboard/aduan', 'aduans' => $aduans]);
+        }
     }
 
     public static function viewAddAduan() //Menampilkan form untuk membuat aduan baru.
     {
-        view('masyarakat/dashboard/layout', ['url' => 'view/masyarakat/crudaduan/add']);
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        } else {
+            view('masyarakat/dashboard/layout', ['url' => 'view/masyarakat/crudaduan/add']);
+        }
     }
 
     public static function storeAduan()
@@ -25,16 +35,15 @@ class AduanMasyakatController
     }
     public static function viewDetailAduan()
     {
-        $id_aduan = $_GET['id'];
-        $aduan = Aduan::getAduanById($id_aduan);
-        view('masyarakat/dashboard/layout', ['url' => 'view/masyarakat/crudaduan/detailaduan', 'aduan' => $aduan]);
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'masyarakat') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        } else {
+            $id_aduan = $_GET['id'];
+            $aduan = Aduan::getAduanById($id_aduan);
+            view('masyarakat/dashboard/layout', ['url' => 'view/masyarakat/crudaduan/detailaduan', 'aduan' => $aduan]);
+        }
     }
-    public static function viewAduanByKategori()
-    {
-        $kategori = $_GET['kategori'];
-        $aduans = Aduan::getAduanCountByCategory();
-    }
-
     public static function cariAduan()
     {
         $searchText = $_GET['query'] ?? '';

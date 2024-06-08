@@ -13,12 +13,14 @@ class DashboardPemerintahController {
             $approvedProposals = Proposal::getApprovedProposals();
             $declinedProposals = Proposal::getDeclinedProposals();
             $pendingProposals = Proposal::getPendingProposals();
+            $aduans = Aduan::getAduanCountByCategory();
             view('pemerintah/dashboard/layout', [
                 'url' => 'home',
                 'proposals' => $proposals,
                 'approvedProposals' => $approvedProposals,  
                 'declinedProposals' => $declinedProposals,
                 'pendingProposals' => $pendingProposals,
+                'aduans' => $aduans,
             ]);
         }
     }

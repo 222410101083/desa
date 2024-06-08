@@ -16,20 +16,6 @@ class AdminController
         $totalPages = ceil($totalArtikel / $limit);
         view('admin/dashboard/layout', ['url' => 'home', 'artikel' => $artikel, 'totalPages' => $totalPages, 'currentPage' => $page]);
     }
-    // public static function Dashboard()
-    // {
-    //     // Cek apakah pengguna telah login dan memiliki peran admin
-    //     if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-    //         header('Location: ' . BASEURL . 'login?auth=false');
-    //         exit;
-    //     }
-
-    //     // Tampilkan dashboard admin
-    //     // view('auth_page/layout', ['url' => 'login']);
-    //     view('admin/dashboard/layout', [
-    //         'url' => 'home',
-    //     ]);
-    // }
     static function profil()
     {
         if (!isset($_SESSION['user'])) {
@@ -103,6 +89,24 @@ class AdminController
         view('admin/dashboard/layout', [
             'users' => $users,
             'url' => 'pemerintah',
+            'user' => $_SESSION['user']['role'] !== 'admin'
+        ]);
+    }
+    public static function ListAkunMasyarakat()
+    {
+        // Cek apakah pengguna telah login dan memiliki peran admin
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        }
+
+        // Ambil data akun pemerintah dari model
+        $users = User::getUsersByRole('masyarakat');
+
+        // Tampilkan view dengan data akun pemerintah
+        view('admin/dashboard/layout', [
+            'users' => $users,
+            'url' => 'masyarakat',
             'user' => $_SESSION['user']['role'] !== 'admin'
         ]);
     }

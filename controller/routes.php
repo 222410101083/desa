@@ -19,6 +19,7 @@ Router::url('admin/tambahakun', 'get', 'AdminController::TambahAkunPemerintah');
 Router::url('admin/pemerintah', 'get', 'AdminController::ListAkunPemerintah');
 Router::url('admin/pemerintah/edit', 'get', 'AdminController::EditAkunPemerintah');
 Router::url('admin/pemerintah/hapus', 'get', 'AdminController::HapusAkunPemerintah');
+Router::url('admin/masyarakat', 'get', 'AdminController::ListAkunMasyarakat');
 Router::url('admin/artikel', 'get', 'ArtikelAdminController::getAllArtikel');
 Router::url('admin/artikel/add', 'get', 'ArtikelAdminController::showAddArtikel');
 Router::url('admin/artikel/edit', 'get', 'ArtikelAdminController::showEditArtikel');
@@ -38,7 +39,7 @@ Router::url('pemerintah/proposal/ubahstatus', 'get', 'ProposalPemerintahControll
 Router::url('pemerintah/aduan', 'get', 'AduanPemerintahController::getAllAduan');
 Router::url('pemerintah/aduan/cari', 'get', 'AduanPemerintahController::cariAduan');
 Router::url('pemerintah/logout', 'get', 'AuthController::logout');
-Router::url('pemerintah/aduan/', 'get', 'AduanPemerintahController::cariAduan');
+Router::url('pemerintah/aduan/detail', 'get', 'AduanPemerintahController::viewDetailAduan');
 Router::url('pemerintah/proposal/cari', 'get', 'ProposalPemerintahController::getFilteredProposal');
 Router::url('pemerintah/profil', 'get', 'ProfilPemerintahController::profil');
 Router::url('pemerintah/profil/ubah', 'get', 'ProfilPemerintahController::viewUbahProfil');
