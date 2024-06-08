@@ -3,19 +3,6 @@
 include_once 'model/proposal_model.php';
 class ProposalPemerintahController
 {
-    static function ListProposal()
-    {
-        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'pemerintah') {
-            header('Location: ' . BASEURL . 'login?auth=false');
-            exit;
-        } else {
-            $proposals = Proposal::getProposalsByUserId($_SESSION['user']['id']);
-            view('pemerintah/dashboard/layout', [
-                'url' => 'proposal',
-                'proposals' => $proposals,
-            ]);
-        }
-    }
     static function showEditProposal()
     {
         $id_proposal = $_GET['id'];

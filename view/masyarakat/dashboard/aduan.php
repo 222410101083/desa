@@ -2,7 +2,7 @@
 <div class="container mx-auto px-4 mt-2">
     <h1 class="text-2xl font-bold text-gray-900 my-4">Daftar Aduan</h1>
     <div class="flex justify-between mt-2">
-        <a href="aduan/add" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-3">Buat Aduan
+        <a href="<?= urlpath('masyarakat/aduan/add') ?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-3">Buat Aduan
             Baru</a>
         <input type="text" id="searchInput" placeholder="Cari Aduan" class="mb-4 px-4 py-2 border rounded">
     </div>
@@ -22,10 +22,10 @@
                 foreach ($aduans as $aduan): ?>
                     <tr class=" border-b border-gray-200 hover:bg-gray-100">
                         <td class="py-3 px-4""><?= $no++; ?></td>
-                        <td class=" py-3 px-4""><?= htmlspecialchars($aduan['judul']) ?></td>
-                        <td class="py-3 px-4""><?= htmlspecialchars($aduan['deskripsi']) ?></td>
-                        <td class=" py-3 px-4""><?= htmlspecialchars($aduan['kategori']) ?></td>
-                        <td class="py-3 px-4""><?= htmlspecialchars($aduan['tanggal']) ?></td>
+                        <td class=" py-3 px-4""><?= $aduan['judul'] ?></td>
+                        <td class="py-3 px-4""><?= $aduan['deskripsi'] ?></td>
+                        <td class=" py-3 px-4""><?= $aduan['kategori'] ?></td>
+                        <td class="py-3 px-4""><?= $aduan['tanggal'] ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

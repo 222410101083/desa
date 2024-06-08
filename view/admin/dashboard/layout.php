@@ -1,7 +1,4 @@
-<?php
-$title = 'Dashboard';
-$user = $_SESSION['user'];
-?>
+
 <div class="flex flex-warp w-full justify-beetwen">
     <aside
         class="position: sticky h-screen top-0 left-0 pt-16 lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75 bg-gradient-to-br from-[#4F46E5] to-[#4F46E5] -translate-x-80 inset-0 rounded-xl transition-transform xl:translate-x-0 ">

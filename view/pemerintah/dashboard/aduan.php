@@ -7,7 +7,7 @@
         <thead>
             <tr class="bg-gray-200">
                 <th class="px-4 py-2">Nomor</th>
-                <th class="px-4 py-2">Nama</th> <!-- Kolom baru untuk nama -->
+                <th class="px-4 py-2">Nama</th>
                 <th class="px-4 py-2">Judul</th>
                 <th class="px-4 py-2">Deskripsi</th>
                 <th class="px-4 py-2">Kategori</th>
@@ -16,14 +16,14 @@
         </thead>
         <tbody>
             <?php $no = 1;
-            foreach ($aduans as $aduan): ?>
+            foreach ($aduan as $aduans): ?>
                 <tr class="text-center">
                     <td class="border px-4 py-2"><?= $no++; ?></td>
-                    <td class="border px-4 py-2"><?= $aduan['nama_pengadu'] ?></td>
-                    <td class="border px-4 py-2"><?= $aduan['judul'] ?></td>
-                    <td class="border px-4 py-2"><?= $aduan['deskripsi'] ?></td>
-                    <td class="border px-4 py-2"><?= $aduan['kategori'] ?></td>
-                    <td class="border px-4 py-2"><?= $aduan['tanggal'] ?></td>
+                    <td class="border px-4 py-2"><?= $aduans['nama_pengadu'] ?></td>
+                    <td class="border px-4 py-2"><?= $aduans['judul'] ?></td>
+                    <td class="border px-4 py-2"><?= $aduans['deskripsi'] ?></td>
+                    <td class="border px-4 py-2"><?= $aduans['kategori'] ?></td>
+                    <td class="border px-4 py-2"><?= $aduans['tanggal'] ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

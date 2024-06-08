@@ -1,62 +1,11 @@
 <?php
-class Aduan {
-    static function select($id='') {
+class Aduan
+{
+    static function getAllAduan()
+    {
         global $conn;
-        $sql = "SELECT * FROM Aduan";
-        if ($id != '') {
-            $sql .= " WHERE id_aduan = $id";
-        }
-        $result = $conn->query($sql);
-        $rows = [];
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $rows[] = $row;
-            }
-        }
-        $result->free();
-        $conn->close();
-        return $rows;
-    }
+        $sql = "SELECT * FROM aduan";
 
-    static function insert($data=[]) {
-        global $conn;
-        $sql = "INSERT INTO Aduan (id_pengadu, judul, deskripsi, kategori, nama_pengadu) VALUES (?, ?, ?, ?, ?)";
-
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("issss", $data['id_pengadu'], $data['judul'], $data['deskripsi'], $data['kategori'], $data['nama_pengadu']);
-        $stmt->execute();
-        $result = $stmt->affected_rows > 0 ? true : false;
-        $stmt->close();
-        $conn->close();
-        return $result;
-    }
-
-    static function update($data=[]) {
-        global $conn;
-        $sql = "UPDATE Aduan SET id_pengadu=?, judul=?, deskripsi=?, kategori=? WHERE id_aduan=?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("isssi", $data['id_pengadu'], $data['judul'], $data['deskripsi'], $data['kategori'], $data['id_aduan']);
-        $stmt->execute();
-        $result = $stmt->affected_rows > 0 ? true : false;
-        $stmt->close();
-        $conn->close();
-        return $result;
-    }
-
-    static function delete($id='') {
-        global $conn;
-        $sql = "DELETE FROM Aduan WHERE id_aduan = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->affected_rows > 0 ? true : false;
-        $stmt->close();
-        $conn->close();
-        return $result;
-    }
-
-    static function rawQuery($sql) {
-        global $conn;
         $result = $conn->query($sql);
         $rows = [];
         if ($result->num_rows > 0) {
@@ -67,23 +16,40 @@ class Aduan {
         $result->free();
         return $rows;
     }
-     // Fungsi untuk menampilkan aduan yang ditulis oleh pengguna tertentu
-     static function selectByUserId($userId) {
+    public static function addAduan($data)
+    {
         global $conn;
-        $sql = "SELECT * FROM Aduan WHERE id_pengadu = ?";
+        $sql = "INSERT INTO aduan (id_pengadu, judul, deskripsi , tanggal , kategori, nama_pengadu) VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $userId);
+        $stmt->bind_param("isssss", $data['id_pengadu'], $data['judul'], $data['deskripsi'], $data['tanggal'], $data['kategori'], $data['nama_pengadu']);
         $stmt->execute();
+        $result = $stmt->affected_rows > 0 ? true : false;
+        return $result;
+    }
+
+    public static function getAduanByUserId($user_id)
+    {
+        global $conn;
+        $sql = "SELECT * FROM aduan WHERE id_pengadu = ?";
+        $stmt = $conn->prepare($sql);
+        if ($stmt === false) {
+            throw new Exception("MySQL prepare error: " . $conn->error);
+        }
+
+        $stmt->bind_param('s', $user_id);
+        $stmt->execute();
+        if ($stmt->error) {
+            throw new Exception("Execute error: " . $stmt->error);
+        }
+
         $result = $stmt->get_result();
-        $rows = [];
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $rows[] = $row;
-            }
+        if ($result->num_rows === 0) {
+            return null;
         }
+
+        $aduans = $result->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
-        $conn->close();
-        return $rows;
+        return $aduans;
     }
 
     public static function cariAduan($searchText)
@@ -106,5 +72,5 @@ class Aduan {
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
-    
+
 }
