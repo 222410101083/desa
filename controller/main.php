@@ -3,6 +3,7 @@ include_once 'auth_controller.php';
 include_once 'artikel_controller.php';
 
 require_once 'admin/dash_admin_controller.php';
+require_once 'admin/ubahPassword.php';
 require_once 'masyarakat/dash_masyarakat_controller.php';
 include_once 'masyarakat/dash_masyarakat_controller.php';
 include_once 'masyarakat/proposal_masyarakat_controller.php';

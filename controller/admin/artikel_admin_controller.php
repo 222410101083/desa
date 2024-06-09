@@ -5,20 +5,36 @@ class ArtikelAdminController
 {
     static function getAllArtikel()
     {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        }
         $artikel = Artikel::getAllArtikel();
         view('admin/dashboard/layout', ['url' => 'artikel', 'artikel' => $artikel]);
     }
 
     static function addArtikel($judul, $konten, $gambar, $penulis)
     {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        }
         Artikel::addArtikel($judul, $konten, $gambar, $penulis);
     }
     static function showAddArtikel()
     {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        }
         view('admin/dashboard/layout', ['url' => 'view/admin/crudartikel/add', 'artikel' => 'addartikel']);
     }
     static function storeArtikel()
     {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $judul = $_POST['judul'] ?? '';
             $konten = $_POST['konten'] ?? '';
@@ -67,14 +83,24 @@ class ArtikelAdminController
     }
     static function showEditArtikel()
     {
-        if (isset($_GET['id'])) {
-            $id_artikel = $_GET['id'];
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        }
+        if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+            if (isset($_GET['id'])) {
+                $id_artikel = $_GET['id'];
             $artikel = Artikel::getArtikelById($id_artikel);
-            view('admin/dashboard/layout', ['url' => 'view/admin/crudartikel/edit', 'artikel' => $artikel]);
+                view('admin/dashboard/layout', ['url' => 'view/admin/crudartikel/edit', 'artikel' => $artikel]);
+            }
         }
     }
     static function updateArtikel()
     {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id_artikel = $_GET['id'] ?? '';
             $judul = $_POST['judul'] ?? '';
@@ -110,6 +136,10 @@ class ArtikelAdminController
     }
     static function deleteArtikel()
     {
+        if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
+            header('Location: ' . BASEURL . 'login?auth=false');
+            exit;
+        }
         if (isset($_GET['id'])) {
             $id_artikel = $_GET['id'];
             Artikel::deleteArtikel($id_artikel);

@@ -203,4 +203,21 @@ class User
         $result = $stmt->get_result();
         return $result->num_rows > 0;
     }
+    public static function ubahPassword($id, $password)
+    {
+        global $conn;
+        $sql = "UPDATE users SET password = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $password, $id);
+        $stmt->execute();
+        return true;
+    }
+    public function updatePassword($id, $newPassword)
+    {
+        global $conn;
+        $sql = "UPDATE users SET password = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $newPassword, $id);
+        $stmt->execute();
+    }
 }

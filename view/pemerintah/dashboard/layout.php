@@ -8,7 +8,7 @@ $user = $_SESSION['user'];
             class=" min-h-screen top-0 left-0 pt-4 lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75 bg-gradient-to-br from-[#4F46E5] to-[#4F46E5] -translate-x-80 inset-0 rounded-xl transition-transform xl:translate-x-0">
             <div class=" flex justify-center border-blue-200">
                 <div class=" flex justify-center mt-2 mb-2 rounded-full w-24 h-24 object-cover border-2 border-white">
-                    <img class="object-cover rounded-full" src="<?= BASEURL . $user['avatar'] ?>" alt="Foto Profil">
+                    <img class="w-24 object-cover rounded-full" src="<?= BASEURL . $user['avatar'] ?>" alt="Foto Profil">
                 </div>
             </div>
             <div class="m-4">

@@ -2,6 +2,10 @@
 include_once 'config/static.php';
 include_once 'controller/main.php';
 include_once 'function/main.php';
+include_once 'controller/admin/ubahPassword.php';
+
+// Inisialisasi UserModel dalam ubahPassword
+ubahPassword::init();
 
 # GET
 Router::url('/', 'get', function () { return view('home'); });
@@ -18,7 +22,6 @@ Router::url('admin/dashboard', 'get', 'AdminController::dashboard');
 Router::url('admin/tambahakun', 'get', 'AdminController::TambahAkunPemerintah');
 Router::url('admin/pemerintah', 'get', 'AdminController::ListAkunPemerintah');
 Router::url('admin/pemerintah/edit', 'get', 'AdminController::EditAkunPemerintah');
-Router::url('admin/pemerintah/hapus', 'get', 'AdminController::HapusAkunPemerintah');
 Router::url('admin/masyarakat', 'get', 'AdminController::ListAkunMasyarakat');
 Router::url('admin/artikel', 'get', 'ArtikelAdminController::getAllArtikel');
 Router::url('admin/artikel/add', 'get', 'ArtikelAdminController::showAddArtikel');
@@ -31,6 +34,8 @@ Router::url('admin/logout', 'get', 'AuthController::logout');
 Router::url('tambahakun/tambahakunpemerintah', 'post', 'AdminController::saveTambahAkunPemerintah');
 Router::url('admin/artikel/add', 'post', 'ArtikelAdminController::storeArtikel');
 Router::url('admin/artikel/edit', 'post', 'ArtikelAdminController::updateArtikel');
+Router::url('admin/pemerintah', 'post', 'ubahPassword::ubahPasswordPemerintah');
+Router::url('admin/masyarakat', 'post', 'ubahPassword::ubahPasswordMasyarakat');
 
 #Pemerintah
 Router::url('pemerintah/dashboard', 'get', 'DashboardPemerintahController::index');

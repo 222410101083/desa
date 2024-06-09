@@ -20,7 +20,6 @@ include 'view/master.php';
                 <tr>
                     <th class="w-1/6 py-3 px-4 uppercase font-semibold text-left">Nomor</th>
                     <th class="w-1/4 py-3 px-4 uppercase font-semibold text-left">Judul</th>
-                    <!-- <th class="w-1/3 py-3 px-4 uppercase font-semibold text-left">Deskripsi</th> -->
                     <th class="w-1/6 py-3 px-4 uppercase font-semibold text-left">Tanggal Pengajuan</th>
                     <th class="w-1/6 py-3 px-4 uppercase font-semibold text-left">Status</th>
                     <th class="w-1/6 py-3 px-4 uppercase font-semibold text-center">Aksi</th>
