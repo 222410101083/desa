@@ -3,7 +3,7 @@
     <h1 class="text-2xl font-bold text-gray-900 my-4">Daftar Aduan</h1>
     <input type="text" id="searchInput" placeholder="Cari Aduan" class="mb-4 px-4 py-2 border rounded">
     <!-- <a href="aduan/add" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Buat Aduan Baru</a> -->
-    <table class="h-screen table-auto w-full mt-4 mb-4">
+    <table class="w-[1230px] bg-white shadow-md rounded-lg text-sm">
         <thead>
             <tr class="bg-gray-200">
                 <th class="px-4 py-2">Nomor</th>
@@ -23,7 +23,10 @@
                     <td class="px-4 py-3"><?= $aduan['judul'] ?></td>
                     <td class="px-4 py-3"><?= $aduan['kategori'] ?></td>
                     <td class="px-4 py-3"><?= $aduan['tanggal'] ?></td>
-                    <td class="px-4 py-3"><a href="<?=urlpath("pemerintah/aduan/detail")?>?id=<?=$aduan['id_aduan']?>" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Detail</a></td>
+                    <td class="py-3 px-4"">
+                            <a href=" <?= urlpath('masyarakat/aduan/detail?id=' . $aduan['id_aduan']) ?>"
+                        class=" text-blue-500 hover:text-blue-700 text-center font-bold mb-3 h-10">Detail Aduan</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -31,17 +34,16 @@
 </div>
 
 <script>
-document.getElementById('searchInput').addEventListener('keyup', function() {
-    var searchText = this.value;
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', '<?=urlpath("pemerintah/aduan/cari")?>?query=' + searchText, true);
-    console.log(xhr);
-    xhr.onload = function() {
-        if (this.status === 200) {
-            document.querySelector('tbody').innerHTML = this.responseText;
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+        var searchText = this.value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '<?= urlpath("pemerintah/aduan/cari") ?>?query=' + searchText, true);
+        console.log(xhr);
+        xhr.onload = function () {
+            if (this.status === 200) {
+                document.querySelector('tbody').innerHTML = this.responseText;
+            }
         }
-    }
-    xhr.send();
-});
+        xhr.send();
+    });
 </script>
-

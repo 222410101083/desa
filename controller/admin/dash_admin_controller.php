@@ -110,20 +110,5 @@ class AdminController
             'user' => $_SESSION['user']['role'] !== 'admin'
         ]);
     }
-    static function remove()
-    {
-        if (!isset($_SESSION['user'])) {
-            header('Location: ' . BASEURL . 'login?auth=false');
-            exit;
-        } else {
-            $id = $_GET['id'];
-            $user = User::deleteUser($id);
-            if ($user) {
-                header('Location: ' . BASEURL . 'admin/pemerintah');
-            } else {
-                header('Location: ' . BASEURL . 'admin/pemerintah?removeFailed=true');
-            }
-        }
-    }
 
 }

@@ -42,7 +42,7 @@ class AduanPemerintahController
             echo "<td class='py-3 px-4'>" . $aduan['judul'] . "</td>";
             echo "<td class='py-3 px-4'>" . $aduan['kategori'] . "</td>";
             echo "<td class='py-3 px-4'>" . $aduan['tanggal'] . "</td>";
-            echo "<td class='py-3 px-4'><a href=" . urlpath("pemerintah/aduan/detail") . "?id=" . $aduan['id_aduan'] . " class='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>Detail</a></td>";
+            echo "<td class='py-3 px-4'><a href=" . urlpath('pemerintah/aduan/detail?id=' . $aduan['id_aduan']) . " class=' text-blue-500 hover:text-blue-700 text-center font-bold mb-3 h-10'>Detail Aduan</a></td>";
             echo "<td class='py-3 px-4 flex justify-center items-center'>";
             echo "</td>";
             echo "</tr>";

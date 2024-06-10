@@ -95,19 +95,14 @@ class User
         return $result;
     }
 
-    static function updateUser($id, $email, $password)
-    {
-        global $conn;
-        $sql = "UPDATE users SET email = ?, password = ? WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssi", $email, $password, $id);
-        $stmt->execute();
-    }
-
-    static function delete($id = '')
-    {
-    }
-
+    // static function updateUser($id, $email, $password)
+    // {
+    //     global $conn;
+    //     $sql = "UPDATE users SET email = ?, password = ? WHERE id = ?";
+    //     $stmt = $conn->prepare($sql);
+    //     $stmt->bind_param("ssi", $email, $password, $id);
+    //     $stmt->execute();
+    // }
     public static function getUsersByRole($role)
     {
         // Dapatkan koneksi database
@@ -130,18 +125,6 @@ class User
 
         // Kembalikan array pengguna
         return $users;
-    }
-    static function deleteUser($id = '')
-    {
-        global $conn;
-        $result = '';
-        $sql = "DELETE FROM users WHERE id = ?"; // SQL query untuk menghapus pengguna berdasarkan ID
-        $stmt = $conn->prepare($sql); // Persiapkan statement       
-        $stmt->bind_param('i', $id); // Bind parameter ke statement
-        $stmt->execute(); // Eksekusi statement
-        $result = $stmt->affected_rows > 0 ? true : false; // Cek apakah query berhasil
-        $stmt->close(); // Tutup statement
-        return $result; // Kembalikan hasil query
     }
     static function getUserByEmail($email)
     {
@@ -203,15 +186,7 @@ class User
         $result = $stmt->get_result();
         return $result->num_rows > 0;
     }
-    public static function ubahPassword($id, $password)
-    {
-        global $conn;
-        $sql = "UPDATE users SET password = ? WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("si", $password, $id);
-        $stmt->execute();
-        return true;
-    }
+
     public function updatePassword($id, $newPassword)
     {
         global $conn;
