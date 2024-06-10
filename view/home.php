@@ -58,7 +58,7 @@
                         </h1>
                         <p class="mt-4 text-lg text-blueGray-200">
                             Desa Jatimulyo adalah desa yang berada di kawasan Tengah Kota Jatimulyo,
-                            Kecamatan Jatimulyo, Kabupaten Jatimulyo, Provinsi Jawa Tengah.
+                            Kecamatan Jenggawah, Kabupaten Jember, Provinsi Jawa Timur.
                         </p>
                     </div>
                 </div>
@@ -80,12 +80,17 @@
                         <div class="px-4 py-5 flex-auto">
                             <div
                                 class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
-                                <i class="fas fa-award"></i>
+                                <i class=""><svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                        viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                                        <path
+                                            d="M320-240h320v-80H320v80Zm0-160h320v-80H320v80ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z" />
+                                    </svg></i>
                             </div>
                             <h6 class="text-xl font-semibold">Pengajuan Proposal</h6>
                             <p class="mt-2 mb-4 text-blueGray-500">
-                                Pengajuan Proposal adalah pengajuan proposal yang akan di lakukan oleh masyarakat
-                                Desa Jatimulyo.
+                                Pengajuan Proposal adalah layanan pengajuan proposal yang akan disediakan untuk
+                                masyarakat
+                                Desa Jatimulyo yang akan mengadakan acara/event.
                             </p>
                         </div>
                     </div>
@@ -95,11 +100,16 @@
                         <div class="px-4 py-5 flex-auto">
                             <div
                                 class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
-                                <i class="fas fa-retweet"></i>
+                                <i class=""><svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                        viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                                        <path
+                                            d="M160-120q-33 0-56.5-23.5T80-200v-640l67 67 66-67 67 67 67-67 66 67 67-67 67 67 66-67 67 67 67-67 66 67 67-67v640q0 33-23.5 56.5T800-120H160Zm0-80h280v-240H160v240Zm360 0h280v-80H520v80Zm0-160h280v-80H520v80ZM160-520h640v-120H160v120Z" />
+                                    </svg></i>
                             </div>
                             <h6 class="text-xl font-semibold">Informasi dan Program</h6>
                             <p class="mt-2 mb-4 text-blueGray-500">
-                                Informasi dan program yang akan di lakukan oleh Desa Jatimulyo.
+                                Informasi dan program yang akan adalah layanan berita dan prohgram tentang desa
+                                Jatimulyo.
                             </p>
                         </div>
                     </div>
@@ -109,11 +119,16 @@
                         <div class="px-4 py-5 flex-auto">
                             <div
                                 class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400">
-                                <i class="fas fa-fingerprint"></i>
+                                <i class=""><svg xmlns="http://www.w3.org/2000/svg" height="24px"
+                                        viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                                        <path
+                                            d="M800-520q-17 0-28.5-11.5T760-560q0-17 11.5-28.5T800-600q17 0 28.5 11.5T840-560q0 17-11.5 28.5T800-520Zm-40-120v-200h80v200h-80ZM360-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM40-160v-112q0-34 17.5-62.5T104-378q62-31 126-46.5T360-440q66 0 130 15.5T616-378q29 15 46.5 43.5T680-272v112H40Zm80-80h480v-32q0-11-5.5-20T580-306q-54-27-109-40.5T360-360q-56 0-111 13.5T140-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T440-640q0-33-23.5-56.5T360-720q-33 0-56.5 23.5T280-640q0 33 23.5 56.5T360-560Zm0-80Zm0 400Z" />
+                                    </svg></i>
                             </div>
                             <h6 class="text-xl font-semibold">Aduan</h6>
                             <p class="mt-2 mb-4 text-blueGray-500">
-                                Aduan adalah aduan yang akan di lakukan oleh masyarakat Desa Jatimulyo.
+                                Aduan adalah layanan aduan yang disediakan untuk masyarakat Desa Jatimulyo terkait
+                                keluhan dan masalah desa.
                             </p>
                         </div>
                     </div>
@@ -144,7 +159,7 @@
                                 <p class="text-base leading-4 text-white mt-2">Vaksinasi teratur membantu
                                     mencegah penyakit menular pada sapi dan meningkatkan kualitas kesehatan
                                     ternak.</p>
-                                <a href="javascript:void(0)"
+                                <a href="<?= BASEURL . 'artikel/' ?>"
                                     class="focus:outline-none focus:underline flex items-center mt-4 cursor-pointer text-white hover:text-gray-200 hover:underline">
                                     <p class="pr-2 text-sm font-medium leading-none">Baca Selengkapnya</p>
                                     <svg class="fill-stroke" width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -168,7 +183,7 @@
                                 </h2>
                                 <p class="text-base leading-4 text-white mt-2">Pemilihan nutrisi yang tepat
                                     esensial untuk kesehatan dan produktivitas sapi.</p>
-                                <a href="javascript:void(0)"
+                                <a href="<?= BASEURL . 'artikel/' ?>"
                                     class="focus:outline-none focus:underline flex items-center mt-4 cursor-pointer text-white hover:text-gray-200 hover:underline">
                                     <p class="pr-2 text-sm font-medium leading-none">Baca Selengkapnya</p>
                                     <svg class="fill-stroke" width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -195,7 +210,7 @@
                                 </h2>
                                 <p class="text-base leading-4 text-white mt-2">Pemilihan nutrisi yang tepat
                                     esensial untuk kesehatan dan produktivitas sapi.</p>
-                                <a href="javascript:void(0)"
+                                <a href="<?= BASEURL . 'artikel/' ?>"
                                     class="focus:outline-none focus:underline flex items-center mt-4 cursor-pointer text-white hover:text-gray-200 hover:underline">
                                     <p class="pr-2 text-sm font-medium leading-none">Baca Selengkapnya</p>
                                     <svg class="fill-stroke" width="16" height="16" viewBox="0 0 16 16" fill="none"
@@ -238,9 +253,10 @@
                     <div class="p-6 bg-grey">
                         <div class="leading-relaxed">
                             <h2 class="leading-tight text-4xl font-bold">Program Acara Desa </h2>
-                            <p class="mt-4 mb-8">Dapatkan bantuan dana dari desa dalam mengadakan perlombaan dan acara di Desa Jatimulyo.</p>
+                            <p class="mt-4 mb-8">Dapatkan bantuan dana dari desa dalam mengadakan perlombaan dan acara
+                                di Desa Jatimulyo.</p>
                             <p><a class="mt-4 button bg-[#538D22] p-4 text-white font-semibold hover:bg-[#538D22]/80 rounded-[2px]"
-                                    href="/register">Daftar
+                                    href="<?= BASEURL . 'register/' ?>">Daftar
                                     Sekarang</a></p>
                         </div>
                     </div>
@@ -252,7 +268,7 @@
 <footer>
     <div class="bg-gray-800 py-4 text-gray-400 ">
         <div class="container px-4 mx-auto flex justify-between">
-            <div class="mx-4 flex flex-warp justify-between">
+            <div class="mx-4 sm:flex  justify-between">
                 <div class="px-4 my-4 w-full">
                     <a href="/" class="block w-56 mb-10">
                         <text class="text-white font-bold text-4xl">
@@ -263,10 +279,9 @@
                         Desa Jatimulyo, Kecamatan Jenggawah, Kabupaten Jember, Provinsi Jawa Timur, Indonesia
                     </p>
                 </div>
-
                 <div class="px-4 my-4 w-full sm:w-auto">
                     <div>
-                        <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">Web Desa</h2>
+                        <h2 class="inline-block text-2xl pb-4 mb-4">Web Desa</h2>
                     </div>
                     <ul class="leading-8">
                         <li><a href="#" class="hover:text-blue-400">About Us</a></li>
@@ -277,7 +292,7 @@
                 </div>
                 <div class="px-4 my-4 w-full sm:w-auto">
                     <div>
-                        <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">Contact
+                        <h2 class="inline-block text-2xl pb-4 mb-4">Contact
                         </h2>
                     </div>
                     <a href="#"
